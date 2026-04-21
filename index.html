@@ -647,10 +647,10 @@ input.invalid, .radio-group.invalid .radio-option:first-child,
             <label class="radio-option"><input type="radio" name="schoolingSystem" value="French Baccalaureate" /> French Baccalaureate</label>
             <label class="radio-option"><input type="radio" name="schoolingSystem" value="Pakistani Matric / Intermediate" /> Pakistani Matric / Intermediate</label>
             <label class="radio-option"><input type="radio" name="schoolingSystem" value="Indian CBSE / ISC" /> Indian CBSE / ISC</label>
-            <label class="radio-option" id="schoolSystemOtherLabel">
-              <input type="radio" name="schoolingSystem" value="Other" id="schoolSystemOtherRadio" /> Other (please specify)
-              <input type="text" class="other-input" id="schoolSystemOtherText" name="schoolingSystemOther" placeholder="Please specify…" style="display:none;" />
-            </label>
+            <label class="radio-option" id="schoolSystemOtherLabel" style="flex-direction:column;align-items:flex-start;">
+               <span style="display:flex;align-items:center;gap:10px;"><input type="radio" name="schoolingSystem" value="Other" id="schoolSystemOtherRadio" /> Other (please specify)</span>
+               <input type="text" class="other-input" id="schoolSystemOtherText" name="schoolingSystemOther" placeholder="Please specify your schooling system..." style="display:none;width:100%;margin-top:10px;" />
+         </label>
           </div>
           <div class="field-error" id="err-schoolingSystem">Please select your schooling system.</div>
         </div>
