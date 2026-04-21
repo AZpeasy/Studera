@@ -34,7 +34,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: #fff;
+  background-color: #f0f7f3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='104' viewBox='0 0 90 104'%3E%3Cg fill='none' stroke='%23147A3E' stroke-width='1.1' stroke-opacity='0.13'%3E%3C!-- flat-top hexagons r=26 --%3E%3C!-- row1 col1 center 45,26 --%3E%3Cpolygon points='71,26 58,48 32,48 19,26 32,4 58,4'/%3E%3C!-- row1 col2 center -45,26 (left bleed) --%3E%3Cpolygon points='-19,26 -32,48 -58,48 -71,26 -58,4 -32,4'/%3E%3C!-- row2 offset center 0,78 --%3E%3Cpolygon points='26,78 13,100 -13,100 -26,78 -13,56 13,56'/%3E%3C!-- row2 center 90,78 --%3E%3Cpolygon points='116,78 103,100 77,100 64,78 77,56 103,56'/%3E%3C!-- row3 center 45,130 --%3E%3Cpolygon points='71,130 58,152 32,152 19,130 32,108 58,108'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 90px 104px;
   color: var(--dark);
   min-height: 100vh;
   padding-bottom: 60px;
@@ -94,6 +97,25 @@ header {
   color: var(--green);
   letter-spacing: -1px;
   line-height: 1;
+}
+
+.logo-s-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-s {
+  display: inline-block;
+}
+
+.grad-cap {
+  position: absolute;
+  top: -0.38em;
+  left: 50%;
+  transform: translateX(-55%);
+  width: 0.9em;
+  height: auto;
+  pointer-events: none;
 }
 
 .logo-tagline {
@@ -358,9 +380,18 @@ footer {
   text-align: center;
   padding: 28px 20px;
   font-size: .82rem;
-  color: #aaa;
+  color: #555;
   border-top: 1px solid var(--gray-mid);
   margin-top: 40px;
+}
+
+footer span {
+  background: #fff;
+  padding: 14px 0;
+  border-top: 1px solid var(--gray-mid);
+  border-bottom: 1px solid var(--gray-mid);
+  display: block;
+  width: 100%;
 }
 
 /* ── VALIDATION ── */
@@ -396,7 +427,30 @@ input.invalid, .radio-group.invalid .radio-option:first-child,
      HEADER
 ══════════════════════════════════════ -->
 <header>
-  <div class="logo-name">Studera</div>
+  <div class="logo-name"><span class="logo-s-wrap"><span class="logo-s">S</span><svg class="grad-cap" viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg">
+  <g transform="rotate(-18, 35, 29)">
+  <!-- Slim short base - front face -->
+  <polygon points="22,30 48,30 48,36 22,36" fill="#c44f0a"/>
+  <!-- Base top face -->
+  <polygon points="16,26 54,26 48,30 22,30" fill="#e05e0a"/>
+  <!-- Base left face -->
+  <polygon points="16,26 22,30 22,36 16,32" fill="#a03d08"/>
+  <!-- Flat board on top -->
+  <polygon points="6,14 58,10 64,22 12,26" fill="#F97316"/>
+  <!-- Board underside left -->
+  <polygon points="6,14 12,26 16,26 16,22 8,18" fill="#bf4a09"/>
+  <!-- Board underside right subtle -->
+  <polygon points="58,10 64,22 54,26 12,26 6,14" fill="#d95c0c" opacity="0.18"/>
+  <!-- Tassel string -->
+  <line x1="6" y1="14" x2="3" y2="32" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
+  <!-- Tassel knot -->
+  <rect x="1" y="31" width="5" height="3" rx="1" fill="#c44f0a"/>
+  <!-- Tassel bundle -->
+  <line x1="2" y1="34" x2="0" y2="42" stroke="#e05e0a" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="3" y1="34" x2="3" y2="43" stroke="#F97316" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="4" y1="34" x2="6" y2="42" stroke="#bf4a09" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg></span>tudera</div>
   <div class="logo-tagline">Making Students Powerful Everyday</div>
 </header>
 
@@ -955,7 +1009,7 @@ input.invalid, .radio-group.invalid .radio-option:first-child,
 
       <!-- 3.2 Sign up at launch -->
       <div class="form-group" data-required="false">
-        <label class="field-label">When Studera officially launches, do you see yourself signing up as a mentor or mentee? If yes, please confirm your email so that we can share updates (we will not spam) 😊</label>
+        <label class="field-label">When Studera officially launches, do you see yourself signing up as a mentor or mentee? If yes, please confirm your email so that we can share updates </label>
         <div class="radio-group" id="launchGroup">
           <label class="radio-option"><input type="radio" name="launchSignup" value="Yes" /> Yes</label>
           <label class="radio-option"><input type="radio" name="launchSignup" value="No" /> No</label>
@@ -978,7 +1032,7 @@ input.invalid, .radio-group.invalid .radio-option:first-child,
   </form>
 </div><!-- /form-wrapper -->
 
-<footer>© 2025 Studera. All rights reserved.</footer>
+<footer><span>© 2026 Studera. All rights reserved.</span></footer>
 
 <!-- ══════════════════════════════════════════════════════════════
      GOOGLE APPS SCRIPT CODE
