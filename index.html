@@ -3,1528 +3,861 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Studera – Student Survey</title>
+<title>Studera Grand Slam — Registration</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ─────────────────────────────────────────────
-   GOOGLE APPS SCRIPT CODE (copy this into Apps Script)
-   See bottom of file for full script in HTML comments
-   ───────────────────────────────────────────── */
-
-:root {
-  --green:      #147A3E;
-  --green-dark: #0e5a2d;
-  --green-light:#e8f5ee;
-  --orange:     #F97316;
-  --orange-bg:  #fff7ed;
-  --gray-light: #F5F5F5;
-  --gray-mid:   #e0e0e0;
-  --gray-text:  #555;
-  --dark:       #1a1a1a;
-  --radius:     10px;
-  --shadow:     0 2px 16px rgba(20,122,62,.10);
+:root{
+  --green:#147A3E; --green-dark:#0e5a2d; --green-light:#e8f5ee;
+  --orange:#F97316; --orange-dark:#c44f0a; --orange-bg:#fff7ed;
+  --gray-light:#F7F7F5; --gray-mid:#e0e0e0; --gray-text:#555;
+  --dark:#1a1a1a; --radius:12px; --shadow:0 2px 18px rgba(20,122,62,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif; background:#f0f7f3;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23147A3E' stroke-opacity='.07' stroke-width='1.2'%3E%3Ccircle cx='30' cy='30' r='22'/%3E%3Cline x1='30' y1='8' x2='30' y2='52'/%3E%3Cline x1='8' y1='30' x2='52' y2='30'/%3E%3C/g%3E%3C/svg%3E");
+  color:var(--dark); min-height:100vh; padding-bottom:60px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* PROGRESS BAR */
+#progress-bar-wrapper{position:sticky;top:0;left:0;width:100%;z-index:1000;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:8px 20px;display:flex;align-items:center;gap:12px;}
+#progress-track{flex:1;height:8px;background:#ffe8d4;border-radius:99px;overflow:hidden;}
+#progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--orange),#fb923c);border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+#progress-label{font-size:12px;font-weight:700;color:var(--orange);white-space:nowrap;min-width:38px;text-align:right;}
 
-html { scroll-behavior: smooth; }
+/* HEADER */
+header{background:#fff;border-bottom:3px solid var(--green);padding:34px 24px 26px;text-align:center;}
+.logo-img{max-height:82px;width:auto;margin:0 auto 6px;display:block;}
+.logo-fallback{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,6vw,3.4rem);color:var(--green);letter-spacing:-1px;line-height:1;}
+.logo-tagline{font-size:clamp(.82rem,2vw,1rem);color:#333;margin-top:6px;letter-spacing:.5px;}
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background-color: #f0f7f3;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='104' viewBox='0 0 90 104'%3E%3Cg fill='none' stroke='%23147A3E' stroke-width='1.1' stroke-opacity='0.13'%3E%3C!-- flat-top hexagons r=26 --%3E%3C!-- row1 col1 center 45,26 --%3E%3Cpolygon points='71,26 58,48 32,48 19,26 32,4 58,4'/%3E%3C!-- row1 col2 center -45,26 (left bleed) --%3E%3Cpolygon points='-19,26 -32,48 -58,48 -71,26 -58,4 -32,4'/%3E%3C!-- row2 offset center 0,78 --%3E%3Cpolygon points='26,78 13,100 -13,100 -26,78 -13,56 13,56'/%3E%3C!-- row2 center 90,78 --%3E%3Cpolygon points='116,78 103,100 77,100 64,78 77,56 103,56'/%3E%3C!-- row3 center 45,130 --%3E%3Cpolygon points='71,130 58,152 32,152 19,130 32,108 58,108'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 90px 104px;
-  color: var(--dark);
-  min-height: 100vh;
-  padding-bottom: 60px;
+/* HERO / WELCOME */
+.hero{max-width:820px;margin:30px auto 0;padding:0 20px;}
+.welcome-card{background:#fff;border:1px solid var(--gray-mid);border-radius:16px;box-shadow:var(--shadow);padding:30px 32px;line-height:1.7;}
+.welcome-card h1{font-family:'DM Serif Display',serif;color:var(--green);font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:14px;line-height:1.15;}
+.welcome-card h1 .accent{color:var(--orange);}
+.welcome-card p{margin-bottom:12px;color:#333;font-size:.97rem;}
+.welcome-card p:last-child{margin-bottom:0;}
+
+.prize-banner{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-radius:16px;padding:26px 28px;margin:22px auto 0;max-width:820px;text-align:center;box-shadow:var(--shadow);}
+.prize-banner .label{text-transform:uppercase;letter-spacing:2px;font-size:.78rem;font-weight:700;color:#c8f0d8;}
+.prize-banner .amount{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,8vw,3.8rem);line-height:1;margin:6px 0 4px;}
+.prize-banner .amount .cur{color:var(--orange);font-size:.5em;vertical-align:super;}
+
+.event-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;max-width:820px;margin:16px auto 0;padding:0 20px;}
+.fact{background:#fff;border:1px solid var(--gray-mid);border-left:4px solid var(--orange);border-radius:12px;padding:16px 18px;}
+.fact .k{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700;margin-bottom:4px;}
+.fact .v{font-size:.95rem;font-weight:500;color:#222;line-height:1.4;}
+
+.stalls-note{max-width:820px;margin:16px auto 0;padding:14px 18px;background:var(--orange-bg);border:1px solid #fed7aa;border-radius:12px;font-size:.9rem;color:#92400e;text-align:center;}
+
+/* FORM WRAP */
+.form-wrapper{max-width:820px;margin:30px auto 0;padding:0 20px;}
+
+/* CATEGORY CHOOSER */
+.chooser-title{font-family:'DM Serif Display',serif;color:var(--green);font-size:1.3rem;text-align:center;margin-bottom:6px;}
+.chooser-sub{text-align:center;color:var(--gray-text);font-size:.9rem;margin-bottom:20px;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:10px;}
+.cat-card{border:2px solid var(--gray-mid);border-radius:16px;padding:22px 16px;text-align:center;cursor:pointer;background:#fff;transition:border-color .18s,transform .12s,box-shadow .18s;}
+.cat-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:var(--shadow);}
+.cat-card.active{border-color:var(--green);background:var(--green-light);box-shadow:var(--shadow);}
+.cat-card .emoji{font-size:2.2rem;display:block;margin-bottom:8px;}
+.cat-card .name{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--green);}
+.cat-card .fee{font-size:.8rem;color:var(--gray-text);margin-top:4px;}
+
+/* SECTIONS */
+.category-body{display:none;margin-top:26px;}
+.category-body.active{display:block;animation:fadeSlide .35s ease;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.poster-wrap{text-align:center;margin-bottom:18px;}
+.poster-wrap img{max-width:100%;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--gray-mid);}
+
+.info-box{background:var(--green-light);border-left:5px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:22px 24px;margin-bottom:22px;line-height:1.7;font-size:.94rem;color:#1f3d2b;}
+.info-box h3{font-family:'DM Serif Display',serif;color:var(--green);font-size:1.2rem;margin-bottom:12px;}
+.info-box .row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
+.info-box .row b{color:var(--green-dark);}
+.info-box .schedule{background:#fff;border-radius:10px;padding:12px 16px;margin:12px 0;}
+.info-box .schedule .day{font-weight:700;color:var(--orange-dark);}
+.info-box .warn{background:var(--orange-bg);border:1px solid #fed7aa;border-radius:10px;padding:12px 14px;margin-top:12px;color:#92400e;font-size:.9rem;}
+.info-box .nic-note{margin-top:10px;font-weight:600;color:var(--green-dark);}
+
+/* CARD */
+.section-card{background:#fff;border:1px solid var(--gray-mid);border-radius:14px;padding:26px 26px 20px;margin-bottom:20px;box-shadow:var(--shadow);}
+.section-title{font-family:'DM Serif Display',serif;font-size:1.18rem;color:var(--green);border-bottom:2px solid var(--green-light);padding-bottom:10px;margin-bottom:20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.captain-badge{background:var(--orange);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;font-family:'DM Sans',sans-serif;letter-spacing:.5px;}
+.sub-badge{background:#94a3b8;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;font-family:'DM Sans',sans-serif;letter-spacing:.5px;}
+.lineup-badge{background:var(--green);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;font-family:'DM Sans',sans-serif;letter-spacing:.5px;}
+
+/* FIELDS */
+.form-group{margin-bottom:18px;}
+label.field-label{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px;color:#1a1a1a;line-height:1.4;}
+label.field-label .req{color:#e53e3e;margin-left:3px;}
+label.field-label .hint{color:#888;font-weight:400;font-size:.82rem;margin-left:4px;}
+input[type=text],input[type=number],input[type=email],input[type=tel],select{
+  width:100%;padding:11px 14px;border:1.5px solid var(--gray-mid);border-radius:var(--radius);
+  font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--dark);background:var(--gray-light);
+  transition:border-color .2s,box-shadow .2s;outline:none;
 }
+select{cursor:pointer;}
+input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(20,122,62,.12);background:#fff;}
+input.locked{background:#eef2f0;color:#555;cursor:not-allowed;}
 
-/* ── STICKY PROGRESS BAR ── */
-#progress-bar-wrapper {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
-  padding: 8px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+/* RADIO / CHECK */
+.radio-group,.checkbox-group{display:flex;flex-direction:column;gap:10px;}
+.radio-row{flex-direction:row;flex-wrap:wrap;}
+.radio-option,.checkbox-option{display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:10px 14px;border:1.5px solid var(--gray-mid);border-radius:var(--radius);background:var(--gray-light);transition:border-color .15s,background .15s;font-size:.92rem;line-height:1.4;flex:1;min-width:120px;}
+.radio-option:hover,.checkbox-option:hover{border-color:var(--green);background:var(--green-light);}
+.radio-option input,.checkbox-option input{width:17px;height:17px;min-width:17px;accent-color:var(--green);margin-top:2px;cursor:pointer;}
+.radio-option.selected,.checkbox-option.selected{border-color:var(--green);background:var(--green-light);}
+.radio-option.disabled,.checkbox-option.disabled{opacity:.5;cursor:not-allowed;}
 
-#progress-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--orange);
-  white-space: nowrap;
-  min-width: 38px;
-  text-align: right;
-}
+.other-input{margin-top:8px;width:100%;padding:8px 12px;border:1.5px solid var(--gray-mid);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;background:#fff;outline:none;display:none;}
+.other-input.show{display:block;}
+.other-input:focus{border-color:var(--green);}
 
-#progress-track {
-  flex: 1;
-  height: 8px;
-  background: #ffe8d4;
-  border-radius: 99px;
-  overflow: hidden;
-}
+.conditional-block{display:none;}
+.conditional-block.visible{display:block;animation:fadeSlide .3s ease;}
 
-#progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--orange), #fb923c);
-  border-radius: 99px;
-  transition: width .4s cubic-bezier(.4,0,.2,1);
-}
+/* CONSENT */
+.consent-box{background:var(--orange-bg);border:1px solid #fed7aa;border-radius:var(--radius);padding:16px 18px;margin-top:6px;}
+.consent-box label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:.9rem;line-height:1.55;color:#5c3a12;}
+.consent-box input{width:18px;height:18px;min-width:18px;accent-color:var(--green);margin-top:2px;}
 
-/* ── HEADER / LOGO ── */
-header {
-  background: #fff;
-  border-bottom: 3px solid var(--green);
-  padding: 36px 24px 28px;
-  text-align: center;
-}
+/* SUBMIT */
+.submit-btn{display:block;width:100%;padding:16px;background:var(--green);color:#fff;font-family:'DM Serif Display',serif;font-size:1.18rem;letter-spacing:.3px;border:none;border-radius:var(--radius);cursor:pointer;margin-top:26px;transition:background .2s,transform .1s;}
+.submit-btn:hover{background:var(--green-dark);}
+.submit-btn:active{transform:scale(.99);}
+.submit-btn:disabled{background:#aaa;cursor:not-allowed;}
 
-.logo-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
-  color: var(--green);
-  letter-spacing: -1px;
-  line-height: 1;
-}
+/* MESSAGES */
+.field-error{color:#e53e3e;font-size:.82rem;margin-top:5px;display:none;}
+.field-error.show{display:block;}
+#success-msg,#error-msg{display:none;padding:24px 26px;border-radius:var(--radius);text-align:center;font-size:1.02rem;margin-top:20px;line-height:1.6;}
+#success-msg{background:var(--green-light);border:2px solid var(--green);color:var(--green-dark);}
+#success-msg h2{font-family:'DM Serif Display',serif;font-size:1.6rem;margin-bottom:10px;}
+#success-msg .mail{color:var(--orange-dark);font-weight:700;}
+#error-msg{background:#fff5f5;border:2px solid #fc8181;color:#c53030;}
 
-.logo-s-wrap {
-  position: relative;
-  display: inline-block;
-}
+footer{text-align:center;padding:28px 20px;font-size:.82rem;color:#555;margin-top:40px;}
 
-.logo-s {
-  display: inline-block;
-}
-
-.grad-cap {
-  position: absolute;
-  top: -0.38em;
-  left: 50%;
-  transform: translateX(-55%);
-  width: 0.9em;
-  height: auto;
-  pointer-events: none;
-}
-
-.logo-tagline {
-  font-size: clamp(.82rem, 2vw, 1rem);
-  color: #333;
-  font-weight: 400;
-  margin-top: 6px;
-  letter-spacing: .5px;
-}
-
-/* ── MISSION BLOCK ── */
-.mission-block {
-  background: var(--green-light);
-  border-left: 5px solid var(--green);
-  margin: 32px auto;
-  max-width: 780px;
-  padding: 28px 32px;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  line-height: 1.78;
-  font-size: .97rem;
-  color: #222;
-}
-
-.mission-block p { margin-bottom: 14px; }
-.mission-block p:last-child { margin-bottom: 0; }
-.mission-block strong { color: var(--green); }
-
-/* ── FORM WRAPPER ── */
-.form-wrapper {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.form-purpose {
-  background: var(--orange-bg);
-  border: 1px solid #fed7aa;
-  border-radius: var(--radius);
-  padding: 14px 18px;
-  font-size: .93rem;
-  color: #92400e;
-  margin-bottom: 12px;
-}
-
-.form-time {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--green);
-  color: #fff;
-  font-weight: 600;
-  font-size: .9rem;
-  padding: 8px 18px;
-  border-radius: 99px;
-  margin-bottom: 30px;
-}
-
-.form-time::before { content: "⏱"; font-size: 1rem; }
-
-/* ── SECTION CARD ── */
-.section-card {
-  background: #fff;
-  border: 1px solid var(--gray-mid);
-  border-radius: 14px;
-  padding: 28px 28px 22px;
-  margin-bottom: 22px;
-  box-shadow: var(--shadow);
-}
-
-.section-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.22rem;
-  color: var(--green);
-  border-bottom: 2px solid var(--green-light);
-  padding-bottom: 10px;
-  margin-bottom: 22px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.section-badge {
-  background: var(--green);
-  color: #fff;
-  font-size: .72rem;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 99px;
-  font-family: 'DM Sans', sans-serif;
-  letter-spacing: .5px;
-}
-
-/* ── FORM GROUP ── */
-.form-group {
-  margin-bottom: 20px;
-}
-
-label.field-label {
-  display: block;
-  font-weight: 600;
-  font-size: .93rem;
-  margin-bottom: 7px;
-  color: #1a1a1a;
-  line-height: 1.4;
-}
-
-label.field-label .req { color: #e53e3e; margin-left: 3px; }
-label.field-label .opt { color: #888; font-weight: 400; font-size: .82rem; margin-left: 4px; }
-
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="tel"] {
-  width: 100%;
-  padding: 11px 15px;
-  border: 1.5px solid var(--gray-mid);
-  border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif;
-  font-size: .95rem;
-  color: var(--dark);
-  background: var(--gray-light);
-  transition: border-color .2s, box-shadow .2s;
-  outline: none;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(20,122,62,.12);
-  background: #fff;
-}
-
-/* ── RADIO / CHECKBOX ── */
-.radio-group, .checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.radio-option, .checkbox-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  cursor: pointer;
-  padding: 10px 14px;
-  border: 1.5px solid var(--gray-mid);
-  border-radius: var(--radius);
-  background: var(--gray-light);
-  transition: border-color .15s, background .15s;
-  font-size: .93rem;
-  line-height: 1.4;
-}
-
-.radio-option:hover, .checkbox-option:hover {
-  border-color: var(--green);
-  background: var(--green-light);
-}
-
-.radio-option input, .checkbox-option input {
-  width: 17px;
-  height: 17px;
-  min-width: 17px;
-  accent-color: var(--green);
-  margin-top: 2px;
-  cursor: pointer;
-}
-
-.radio-option.selected, .checkbox-option.selected {
-  border-color: var(--green);
-  background: var(--green-light);
-}
-
-/* "Other" text inside option */
-.other-input {
-  margin-top: 8px;
-  width: 100%;
-  padding: 8px 12px;
-  border: 1.5px solid var(--gray-mid);
-  border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: .9rem;
-  background: #fff;
-  outline: none;
-}
-.other-input:focus { border-color: var(--green); }
-
-/* ── CONDITIONAL BLOCK ── */
-.conditional-block {
-  display: none;
-  overflow: hidden;
-  transition: opacity .3s ease;
-  opacity: 0;
-}
-
-.conditional-block.visible {
-  display: block;
-  opacity: 1;
-  animation: fadeSlide .3s ease forwards;
-}
-
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── BRANCH TOGGLE ── */
-#branch-a, #branch-b { display: none; }
-#branch-a.active, #branch-b.active { display: block; }
-
-/* ── SUBMIT BUTTON ── */
-.submit-btn {
-  display: block;
-  width: 100%;
-  padding: 16px;
-  background: var(--green);
-  color: #fff;
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.18rem;
-  letter-spacing: .3px;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  margin-top: 30px;
-  transition: background .2s, transform .1s;
-}
-
-.submit-btn:hover { background: var(--green-dark); }
-.submit-btn:active { transform: scale(.99); }
-
-.submit-btn:disabled {
-  background: #aaa;
-  cursor: not-allowed;
-}
-
-/* ── MESSAGES ── */
-#success-msg, #error-msg {
-  display: none;
-  padding: 20px 24px;
-  border-radius: var(--radius);
-  text-align: center;
-  font-size: 1.05rem;
-  margin-top: 20px;
-  font-weight: 500;
-}
-
-#success-msg {
-  background: var(--green-light);
-  border: 2px solid var(--green);
-  color: var(--green-dark);
-}
-
-#error-msg {
-  background: #fff5f5;
-  border: 2px solid #fc8181;
-  color: #c53030;
-}
-
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 28px 20px;
-  font-size: .82rem;
-  color: #555;
-  border-top: 1px solid var(--gray-mid);
-  margin-top: 40px;
-}
-
-footer span {
-  background: #fff;
-  padding: 14px 0;
-  border-top: 1px solid var(--gray-mid);
-  border-bottom: 1px solid var(--gray-mid);
-  display: block;
-  width: 100%;
-}
-
-/* ── VALIDATION ── */
-.field-error {
-  color: #e53e3e;
-  font-size: .82rem;
-  margin-top: 5px;
-  display: none;
-}
-
-input.invalid, .radio-group.invalid .radio-option:first-child,
-.checkbox-group.invalid { outline: 2px solid #e53e3e; border-radius: 8px; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 540px) {
-  .section-card { padding: 20px 16px 16px; }
-  .mission-block { padding: 20px 18px; }
+@media(max-width:540px){
+  .section-card{padding:20px 16px 16px;}
+  .welcome-card{padding:22px 20px;}
+  .radio-option,.checkbox-option{min-width:100%;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     STICKY PROGRESS BAR
-══════════════════════════════════════ -->
+<!-- PROGRESS -->
 <div id="progress-bar-wrapper">
   <span style="font-size:12px;font-weight:600;color:#555;white-space:nowrap;">Progress</span>
   <div id="progress-track"><div id="progress-fill"></div></div>
   <span id="progress-label">0%</span>
 </div>
 
-<!-- ══════════════════════════════════════
-     HEADER
-══════════════════════════════════════ -->
+<!-- HEADER -->
 <header>
-  <div class="logo-name"><span class="logo-s-wrap"><span class="logo-s">S</span><svg class="grad-cap" viewBox="0 0 70 58" xmlns="http://www.w3.org/2000/svg">
-  <g transform="rotate(-18, 35, 29)">
-  <!-- Slim short base - front face -->
-  <polygon points="22,30 48,30 48,36 22,36" fill="#c44f0a"/>
-  <!-- Base top face -->
-  <polygon points="16,26 54,26 48,30 22,30" fill="#e05e0a"/>
-  <!-- Base left face -->
-  <polygon points="16,26 22,30 22,36 16,32" fill="#a03d08"/>
-  <!-- Flat board on top -->
-  <polygon points="6,14 58,10 64,22 12,26" fill="#F97316"/>
-  <!-- Board underside left -->
-  <polygon points="6,14 12,26 16,26 16,22 8,18" fill="#bf4a09"/>
-  <!-- Board underside right subtle -->
-  <polygon points="58,10 64,22 54,26 12,26 6,14" fill="#d95c0c" opacity="0.18"/>
-  <!-- Tassel string -->
-  <line x1="6" y1="14" x2="3" y2="32" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
-  <!-- Tassel knot -->
-  <rect x="1" y="31" width="5" height="3" rx="1" fill="#c44f0a"/>
-  <!-- Tassel bundle -->
-  <line x1="2" y1="34" x2="0" y2="42" stroke="#e05e0a" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="3" y1="34" x2="3" y2="43" stroke="#F97316" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="4" y1="34" x2="6" y2="42" stroke="#bf4a09" stroke-width="1.5" stroke-linecap="round"/>
-  </g>
-</svg></span>tudera</div>
+  <img src="logo.png" alt="Studera" class="logo-img"
+       onerror="this.style.display='none';document.getElementById('logo-fb').style.display='block';">
+  <div id="logo-fb" class="logo-fallback" style="display:none;">Studera</div>
   <div class="logo-tagline">Making Students Powerful Everyday</div>
 </header>
 
-<!-- ══════════════════════════════════════
-     MISSION STATEMENT
-══════════════════════════════════════ -->
-<div class="mission-block">
-  <p><strong>Making Students Powerful Everyday.</strong></p>
-  <p>At Studera, we believe the greatest power is opportunity.</p>
-  <p>Yet today, most students receive generic college counselling. A typical school counsellor works with between 35 to 70 students from the same school. Everyone gets the same vague personal statement and essay edits, the same university suggestions based only on grades, and the same general scholarship lists. This advice does not help a student reach their dream university.</p>
-  <p>Studera changes this. We connect high school students with current undergraduate students from their exact target university and programme. These mentors, who share the same country of origin, schooling system, and come from a similar background, can tell you exactly what the university looks for in applicants and help you construct and edit your essays accordingly. They can guide you on which extracurriculars to pursue, as well as financial aid and scholarship opportunities tied to your major. Most importantly, they can evaluate your university selection on more than just your grades, sharing first-hand experience to help you decide whether that university really is for you.</p>
-  <p>They can give you resources that no generic counsellor even knows about. The guidance transforms from vague and generic to context-friendly and effective. This is how we make students powerful everyday. We give students an exact path to their dream university from someone who has already walked it.</p>
+<!-- WELCOME -->
+<div class="hero">
+  <div class="welcome-card">
+    <h1>Welcome to the <span class="accent">Studera Grand Slam</span></h1>
+    <p>Studera is an EdTech startup on a mission to make students powerful everyday — connecting them with mentors who have already walked the path they want to take.</p>
+    <p>The <b>Grand Slam</b> is our flagship fundraising sports festival: two days of Padel and Futsal, run by students, for the community. Every registration and ticket directly fuels Studera's work. Whether you're competing, volunteering, or cheering from the stands, you're part of it.</p>
+  </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     FORM
-══════════════════════════════════════ -->
+<!-- PRIZE -->
+<div class="prize-banner">
+  <div class="label">Total Prize Pool</div>
+  <div class="amount"><span class="cur">PKR</span> 110,000</div>
+</div>
+
+<!-- FACTS -->
+<div class="event-facts">
+  <div class="fact"><div class="k">Competition Days</div><div class="v">25th &amp; 26th July 2025</div></div>
+  <div class="fact"><div class="k">Location</div><div class="v">The International School, Pakistan Railways Campus, DHA Phase 2 — opposite Foundation Public School, Defense Campus</div></div>
+</div>
+<div class="stalls-note">☕ Coffee, refreshment &amp; hydration stalls will be available to purchase for all athletes, volunteers and spectators throughout the event.</div>
+
+<!-- FORM -->
 <div class="form-wrapper">
+  <div class="chooser-title">Register to take part</div>
+  <div class="chooser-sub">Choose the category you're registering for — the form updates to match.</div>
 
-  <div class="form-purpose">
-    📋 This form is part of research and development for an upcoming startup. Your responses will help us build a better platform.
+  <div class="cat-grid">
+    <div class="cat-card" data-cat="padel">
+      <span class="emoji">🎾</span><div class="name">Padel</div><div class="fee">10,000 PKR / team</div>
+    </div>
+    <div class="cat-card" data-cat="futsal">
+      <span class="emoji">⚽</span><div class="name">Futsal</div><div class="fee">12,000 PKR / team</div>
+    </div>
+    <div class="cat-card" data-cat="volunteer">
+      <span class="emoji">🙌</span><div class="name">Volunteer</div><div class="fee">Free to join</div>
+    </div>
+    <div class="cat-card" data-cat="spectator">
+      <span class="emoji">🎟️</span><div class="name">Spectator</div><div class="fee">100 PKR / both days</div>
+    </div>
   </div>
 
-  <div class="form-time">Total time to fill form: 4 min only</div>
+  <form id="reg-form" novalidate>
+    <input type="hidden" id="category" name="category" value="">
 
-  <form id="survey-form" novalidate>
-
-    <!-- ══ SECTION 1: BASIC INFO ══ -->
-    <div class="section-card">
-      <div class="section-title">
-        <span class="section-badge">Section 1</span> Basic Information
+    <!-- ============ PADEL ============ -->
+    <div class="category-body" id="body-padel">
+      <div class="poster-wrap">
+        <img src="padel.png" alt="Padel poster" onerror="this.style.display='none'">
+      </div>
+      <div class="info-box">
+        <h3>Padel — Important Information</h3>
+        <div class="row"><b>Registration Fee:</b>&nbsp;10,000 PKR per team</div>
+        <div class="row"><b>Tournament Category:</b>&nbsp;C (Low–mid intermediate)</div>
+        <div class="schedule">
+          <div><span class="day">25th July</span> — Group Stage Games · 6 pm – 11 pm</div>
+          <div style="margin-top:6px;"><span class="day">26th July</span> — Quarterfinals, Semifinals &amp; Finals · 7 pm – 11 pm</div>
+        </div>
+        <p>Your game slots will be shared in advance. Teams should arrive 15–30 minutes before their game for a smooth pre-game registration. If a team does not clear pre-game registration at least 5 minutes before the game, it results in a walkover win for the opposing team.</p>
+        <div class="nic-note">Important: Please carry your NIC, or a digital picture of it, for verification during pre-game registration.</div>
       </div>
 
-      <!-- 1.1 Full Name -->
-      <div class="form-group" data-required="true">
-        <label class="field-label" for="fullName">Full Name <span class="req">*</span></label>
-        <input type="text" id="fullName" name="fullName" placeholder="Your full name" autocomplete="name" />
-        <div class="field-error" id="err-fullName">Please enter your full name.</div>
+      <div class="section-card">
+        <div class="section-title">Team</div>
+        <div class="form-group">
+          <label class="field-label" for="padel-team">Team Name <span class="req">*</span></label>
+          <input type="text" id="padel-team" data-req placeholder="Your team name">
+          <div class="field-error">Please enter a team name.</div>
+        </div>
       </div>
 
-      <!-- 1.2 Age -->
-      <div class="form-group" data-required="true">
-        <label class="field-label" for="age">Age <span class="req">*</span></label>
-        <input type="number" id="age" name="age" min="13" max="100" placeholder="e.g. 17" />
-        <div class="field-error" id="err-age">Please enter a valid age (13–100).</div>
+      <div id="padel-players"></div>
+
+      <div class="section-card">
+        <div class="consent-box">
+          <label>
+            <input type="checkbox" id="padel-consent" data-req>
+            <span>I confirm the details above are accurate. I understand that Studera may verify eligibility, and reserves the right to cancel a registration, disqualify a team, or amend the tournament schedule at its discretion. I agree that the information provided may be used by Studera solely to organise this event and to stay in touch about it.</span>
+          </label>
+          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FUTSAL ============ -->
+    <div class="category-body" id="body-futsal">
+      <div class="poster-wrap">
+        <img src="futsal.png" alt="Futsal poster" onerror="this.style.display='none'">
+      </div>
+      <div class="info-box">
+        <h3>Futsal — Important Information</h3>
+        <div class="row"><b>Registration Fee:</b>&nbsp;12,000 PKR per team</div>
+        <div class="row"><b>Tournament Category:</b>&nbsp;U-20</div>
+        <div class="row"><b>Match Format:</b>&nbsp;5v5</div>
+        <div class="schedule">
+          <div><span class="day">25th July</span> — Group Stage Games · 6 pm – 10 pm</div>
+          <div style="margin-top:6px;"><span class="day">26th July</span> — Quarterfinals, Semifinals &amp; Finals · 8 pm – 11 pm</div>
+        </div>
+        <p>Your game slots will be shared in advance. Teams should arrive 15–30 minutes before their game for a smooth pre-game registration. If a team does not clear pre-game registration at least 5 minutes before the game, it results in a walkover win for the opposing team.</p>
+        <div class="nic-note">Important: Please carry your NIC, or a digital picture of it, for verification during pre-game registration.</div>
       </div>
 
-      <!-- 1.3 Email -->
-      <div class="form-group" data-required="true">
-        <label class="field-label" for="email">Email Address <span class="req">*</span></label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
-        <div class="field-error" id="err-email">Please enter a valid email address.</div>
+      <div class="section-card">
+        <div class="section-title">Team</div>
+        <div class="form-group">
+          <label class="field-label" for="futsal-team">Team Name <span class="req">*</span></label>
+          <input type="text" id="futsal-team" data-req placeholder="Your team name">
+          <div class="field-error">Please enter a team name.</div>
+        </div>
+        <div class="form-group">
+          <label class="field-label">Does your team have a game kit to wear on tournament day? <span class="req">*</span></label>
+          <div class="radio-group radio-row" data-radio="futsal-kit">
+            <label class="radio-option"><input type="radio" name="futsal-kit" value="Yes"><span>Yes</span></label>
+            <label class="radio-option"><input type="radio" name="futsal-kit" value="No"><span>No</span></label>
+          </div>
+          <div class="field-error">Please choose one.</div>
+          <div style="font-size:.85rem;color:var(--gray-text);margin-top:8px;">If you select <b>No</b>, we'll arrange bibs so all players on the field wear uniform attire.</div>
+        </div>
+        <div class="form-group">
+          <label class="field-label" for="futsal-size">Number of people in your team <span class="hint">(min 5, max 8)</span> <span class="req">*</span></label>
+          <select id="futsal-size" data-req>
+            <option value="">Select team size…</option>
+            <option value="5">5 players</option>
+            <option value="6">6 players</option>
+            <option value="7">7 players</option>
+            <option value="8">8 players</option>
+          </select>
+          <div class="field-error">Please select your team size.</div>
+        </div>
       </div>
 
-<!-- 1.4 Phone -->
-<div class="form-group">
-  <label class="field-label" for="phone">Phone Number <span class="opt">(optional)</span></label>
-  <div style="display:flex;gap:8px;align-items:stretch;">
-    <select id="phoneCode" name="phoneCode" style="padding:11px 10px;border:1.5px solid #e0e0e0;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.93rem;background:#F5F5F5;color:#1a1a1a;outline:none;cursor:pointer;max-width:180px;">
-      <option value="+93">🇦🇫 +93 Afghanistan</option>
-      <option value="+355">🇦🇱 +355 Albania</option>
-      <option value="+213">🇩🇿 +213 Algeria</option>
-      <option value="+376">🇦🇩 +376 Andorra</option>
-      <option value="+244">🇦🇴 +244 Angola</option>
-      <option value="+1">🇦🇬 +1 Antigua & Barbuda</option>
-      <option value="+54">🇦🇷 +54 Argentina</option>
-      <option value="+374">🇦🇲 +374 Armenia</option>
-      <option value="+61">🇦🇺 +61 Australia</option>
-      <option value="+43">🇦🇹 +43 Austria</option>
-      <option value="+994">🇦🇿 +994 Azerbaijan</option>
-      <option value="+1">🇧🇸 +1 Bahamas</option>
-      <option value="+973">🇧🇭 +973 Bahrain</option>
-      <option value="+880">🇧🇩 +880 Bangladesh</option>
-      <option value="+1">🇧🇧 +1 Barbados</option>
-      <option value="+375">🇧🇾 +375 Belarus</option>
-      <option value="+32">🇧🇪 +32 Belgium</option>
-      <option value="+501">🇧🇿 +501 Belize</option>
-      <option value="+229">🇧🇯 +229 Benin</option>
-      <option value="+975">🇧🇹 +975 Bhutan</option>
-      <option value="+591">🇧🇴 +591 Bolivia</option>
-      <option value="+387">🇧🇦 +387 Bosnia & Herzegovina</option>
-      <option value="+267">🇧🇼 +267 Botswana</option>
-      <option value="+55">🇧🇷 +55 Brazil</option>
-      <option value="+673">🇧🇳 +673 Brunei</option>
-      <option value="+359">🇧🇬 +359 Bulgaria</option>
-      <option value="+226">🇧🇫 +226 Burkina Faso</option>
-      <option value="+257">🇧🇮 +257 Burundi</option>
-      <option value="+238">🇨🇻 +238 Cabo Verde</option>
-      <option value="+855">🇰🇭 +855 Cambodia</option>
-      <option value="+237">🇨🇲 +237 Cameroon</option>
-      <option value="+1">🇨🇦 +1 Canada</option>
-      <option value="+236">🇨🇫 +236 Central African Republic</option>
-      <option value="+235">🇹🇩 +235 Chad</option>
-      <option value="+56">🇨🇱 +56 Chile</option>
-      <option value="+86">🇨🇳 +86 China</option>
-      <option value="+57">🇨🇴 +57 Colombia</option>
-      <option value="+269">🇰🇲 +269 Comoros</option>
-      <option value="+242">🇨🇬 +242 Congo</option>
-      <option value="+506">🇨🇷 +506 Costa Rica</option>
-      <option value="+385">🇭🇷 +385 Croatia</option>
-      <option value="+53">🇨🇺 +53 Cuba</option>
-      <option value="+357">🇨🇾 +357 Cyprus</option>
-      <option value="+420">🇨🇿 +420 Czech Republic</option>
-      <option value="+45">🇩🇰 +45 Denmark</option>
-      <option value="+253">🇩🇯 +253 Djibouti</option>
-      <option value="+1">🇩🇲 +1 Dominica</option>
-      <option value="+1">🇩🇴 +1 Dominican Republic</option>
-      <option value="+593">🇪🇨 +593 Ecuador</option>
-      <option value="+20">🇪🇬 +20 Egypt</option>
-      <option value="+503">🇸🇻 +503 El Salvador</option>
-      <option value="+240">🇬🇶 +240 Equatorial Guinea</option>
-      <option value="+291">🇪🇷 +291 Eritrea</option>
-      <option value="+372">🇪🇪 +372 Estonia</option>
-      <option value="+268">🇸🇿 +268 Eswatini</option>
-      <option value="+251">🇪🇹 +251 Ethiopia</option>
-      <option value="+679">🇫🇯 +679 Fiji</option>
-      <option value="+358">🇫🇮 +358 Finland</option>
-      <option value="+33">🇫🇷 +33 France</option>
-      <option value="+241">🇬🇦 +241 Gabon</option>
-      <option value="+220">🇬🇲 +220 Gambia</option>
-      <option value="+995">🇬🇪 +995 Georgia</option>
-      <option value="+49">🇩🇪 +49 Germany</option>
-      <option value="+233">🇬🇭 +233 Ghana</option>
-      <option value="+30">🇬🇷 +30 Greece</option>
-      <option value="+1">🇬🇩 +1 Grenada</option>
-      <option value="+502">🇬🇹 +502 Guatemala</option>
-      <option value="+224">🇬🇳 +224 Guinea</option>
-      <option value="+245">🇬🇼 +245 Guinea-Bissau</option>
-      <option value="+592">🇬🇾 +592 Guyana</option>
-      <option value="+509">🇭🇹 +509 Haiti</option>
-      <option value="+504">🇭🇳 +504 Honduras</option>
-      <option value="+36">🇭🇺 +36 Hungary</option>
-      <option value="+354">🇮🇸 +354 Iceland</option>
-      <option value="+91">🇮🇳 +91 India</option>
-      <option value="+62">🇮🇩 +62 Indonesia</option>
-      <option value="+98">🇮🇷 +98 Iran</option>
-      <option value="+964">🇮🇶 +964 Iraq</option>
-      <option value="+353">🇮🇪 +353 Ireland</option>
-      <option value="+972">🇮🇱 +972 Israel</option>
-      <option value="+39">🇮🇹 +39 Italy</option>
-      <option value="+1">🇯🇲 +1 Jamaica</option>
-      <option value="+81">🇯🇵 +81 Japan</option>
-      <option value="+962">🇯🇴 +962 Jordan</option>
-      <option value="+7">🇰🇿 +7 Kazakhstan</option>
-      <option value="+254">🇰🇪 +254 Kenya</option>
-      <option value="+686">🇰🇮 +686 Kiribati</option>
-      <option value="+383">🇽🇰 +383 Kosovo</option>
-      <option value="+965">🇰🇼 +965 Kuwait</option>
-      <option value="+996">🇰🇬 +996 Kyrgyzstan</option>
-      <option value="+856">🇱🇦 +856 Laos</option>
-      <option value="+371">🇱🇻 +371 Latvia</option>
-      <option value="+961">🇱🇧 +961 Lebanon</option>
-      <option value="+266">🇱🇸 +266 Lesotho</option>
-      <option value="+231">🇱🇷 +231 Liberia</option>
-      <option value="+218">🇱🇾 +218 Libya</option>
-      <option value="+423">🇱🇮 +423 Liechtenstein</option>
-      <option value="+370">🇱🇹 +370 Lithuania</option>
-      <option value="+352">🇱🇺 +352 Luxembourg</option>
-      <option value="+261">🇲🇬 +261 Madagascar</option>
-      <option value="+265">🇲🇼 +265 Malawi</option>
-      <option value="+60">🇲🇾 +60 Malaysia</option>
-      <option value="+960">🇲🇻 +960 Maldives</option>
-      <option value="+223">🇲🇱 +223 Mali</option>
-      <option value="+356">🇲🇹 +356 Malta</option>
-      <option value="+692">🇲🇭 +692 Marshall Islands</option>
-      <option value="+222">🇲🇷 +222 Mauritania</option>
-      <option value="+230">🇲🇺 +230 Mauritius</option>
-      <option value="+52">🇲🇽 +52 Mexico</option>
-      <option value="+691">🇫🇲 +691 Micronesia</option>
-      <option value="+373">🇲🇩 +373 Moldova</option>
-      <option value="+377">🇲🇨 +377 Monaco</option>
-      <option value="+976">🇲🇳 +976 Mongolia</option>
-      <option value="+382">🇲🇪 +382 Montenegro</option>
-      <option value="+212">🇲🇦 +212 Morocco</option>
-      <option value="+258">🇲🇿 +258 Mozambique</option>
-      <option value="+95">🇲🇲 +95 Myanmar</option>
-      <option value="+264">🇳🇦 +264 Namibia</option>
-      <option value="+674">🇳🇷 +674 Nauru</option>
-      <option value="+977">🇳🇵 +977 Nepal</option>
-      <option value="+31">🇳🇱 +31 Netherlands</option>
-      <option value="+64">🇳🇿 +64 New Zealand</option>
-      <option value="+505">🇳🇮 +505 Nicaragua</option>
-      <option value="+227">🇳🇪 +227 Niger</option>
-      <option value="+234">🇳🇬 +234 Nigeria</option>
-      <option value="+47">🇳🇴 +47 Norway</option>
-      <option value="+968">🇴🇲 +968 Oman</option>
-      <option value="+92" selected>🇵🇰 +92 Pakistan</option>
-      <option value="+680">🇵🇼 +680 Palau</option>
-      <option value="+970">🇵🇸 +970 Palestine</option>
-      <option value="+507">🇵🇦 +507 Panama</option>
-      <option value="+675">🇵🇬 +675 Papua New Guinea</option>
-      <option value="+595">🇵🇾 +595 Paraguay</option>
-      <option value="+51">🇵🇪 +51 Peru</option>
-      <option value="+63">🇵🇭 +63 Philippines</option>
-      <option value="+48">🇵🇱 +48 Poland</option>
-      <option value="+351">🇵🇹 +351 Portugal</option>
-      <option value="+974">🇶🇦 +974 Qatar</option>
-      <option value="+40">🇷🇴 +40 Romania</option>
-      <option value="+7">🇷🇺 +7 Russia</option>
-      <option value="+250">🇷🇼 +250 Rwanda</option>
-      <option value="+1">🇰🇳 +1 Saint Kitts & Nevis</option>
-      <option value="+1">🇱🇨 +1 Saint Lucia</option>
-      <option value="+1">🇻🇨 +1 Saint Vincent</option>
-      <option value="+685">🇼🇸 +685 Samoa</option>
-      <option value="+378">🇸🇲 +378 San Marino</option>
-      <option value="+239">🇸🇹 +239 Sao Tome & Principe</option>
-      <option value="+966">🇸🇦 +966 Saudi Arabia</option>
-      <option value="+221">🇸🇳 +221 Senegal</option>
-      <option value="+381">🇷🇸 +381 Serbia</option>
-      <option value="+248">🇸🇨 +248 Seychelles</option>
-      <option value="+232">🇸🇱 +232 Sierra Leone</option>
-      <option value="+65">🇸🇬 +65 Singapore</option>
-      <option value="+421">🇸🇰 +421 Slovakia</option>
-      <option value="+386">🇸🇮 +386 Slovenia</option>
-      <option value="+677">🇸🇧 +677 Solomon Islands</option>
-      <option value="+252">🇸🇴 +252 Somalia</option>
-      <option value="+27">🇿🇦 +27 South Africa</option>
-      <option value="+211">🇸🇸 +211 South Sudan</option>
-      <option value="+34">🇪🇸 +34 Spain</option>
-      <option value="+94">🇱🇰 +94 Sri Lanka</option>
-      <option value="+249">🇸🇩 +249 Sudan</option>
-      <option value="+597">🇸🇷 +597 Suriname</option>
-      <option value="+46">🇸🇪 +46 Sweden</option>
-      <option value="+41">🇨🇭 +41 Switzerland</option>
-      <option value="+963">🇸🇾 +963 Syria</option>
-      <option value="+886">🇹🇼 +886 Taiwan</option>
-      <option value="+992">🇹🇯 +992 Tajikistan</option>
-      <option value="+255">🇹🇿 +255 Tanzania</option>
-      <option value="+66">🇹🇭 +66 Thailand</option>
-      <option value="+670">🇹🇱 +670 Timor-Leste</option>
-      <option value="+228">🇹🇬 +228 Togo</option>
-      <option value="+676">🇹🇴 +676 Tonga</option>
-      <option value="+1">🇹🇹 +1 Trinidad & Tobago</option>
-      <option value="+216">🇹🇳 +216 Tunisia</option>
-      <option value="+90">🇹🇷 +90 Turkey</option>
-      <option value="+993">🇹🇲 +993 Turkmenistan</option>
-      <option value="+688">🇹🇻 +688 Tuvalu</option>
-      <option value="+256">🇺🇬 +256 Uganda</option>
-      <option value="+380">🇺🇦 +380 Ukraine</option>
-      <option value="+971">🇦🇪 +971 United Arab Emirates</option>
-      <option value="+44">🇬🇧 +44 United Kingdom</option>
-      <option value="+1">🇺🇸 +1 United States</option>
-      <option value="+598">🇺🇾 +598 Uruguay</option>
-      <option value="+998">🇺🇿 +998 Uzbekistan</option>
-      <option value="+678">🇻🇺 +678 Vanuatu</option>
-      <option value="+379">🇻🇦 +379 Vatican City</option>
-      <option value="+58">🇻🇪 +58 Venezuela</option>
-      <option value="+84">🇻🇳 +84 Vietnam</option>
-      <option value="+967">🇾🇪 +967 Yemen</option>
-      <option value="+260">🇿🇲 +260 Zambia</option>
-      <option value="+263">🇿🇼 +263 Zimbabwe</option>
-    </select>
-    <input type="tel" id="phone" name="phone" placeholder="e.g. 300 0000000" autocomplete="tel" style="flex:1;" />
+      <div id="futsal-players"></div>
+
+      <div class="section-card" id="futsal-consent-card" style="display:none;">
+        <div class="consent-box">
+          <label>
+            <input type="checkbox" id="futsal-consent" data-req>
+            <span>I confirm the details above are accurate. I understand that Studera may verify eligibility, and reserves the right to cancel a registration, disqualify a team, or amend the tournament schedule at its discretion. I agree that the information provided may be used by Studera solely to organise this event and to stay in touch about it.</span>
+          </label>
+          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VOLUNTEER ============ -->
+    <div class="category-body" id="body-volunteer">
+      <div class="info-box">
+        <h3>Volunteer — Important Information</h3>
+        <div class="schedule">
+          <div><span class="day">25th July</span> — Group Stage Games · 6 pm – 10 pm</div>
+          <div style="margin-top:6px;"><span class="day">26th July</span> — Quarterfinals, Semifinals &amp; Finals · 8 pm – 11 pm</div>
+        </div>
+        <p>Volunteers are expected to arrive one hour before the event starts each day. Please note: transportation will <b>not</b> be provided.</p>
+      </div>
+
+      <div id="volunteer-player"></div>
+
+      <div class="section-card">
+        <div class="section-title">Volunteering Preferences</div>
+        <div class="form-group">
+          <label class="field-label">Which sport would you prefer to volunteer for? <span class="req">*</span></label>
+          <div class="radio-group radio-row" data-radio="vol-sport">
+            <label class="radio-option"><input type="radio" name="vol-sport" value="Padel"><span>Padel</span></label>
+            <label class="radio-option"><input type="radio" name="vol-sport" value="Futsal"><span>Futsal</span></label>
+          </div>
+          <div class="field-error">Please choose a preference.</div>
+        </div>
+        <div class="form-group">
+          <label class="field-label">What would you like to help with? <span class="hint">(choose any 2)</span> <span class="req">*</span></label>
+          <div class="checkbox-group" id="vol-roles">
+            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Pre-Game Registration"><span>Pre-Game Registration</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Refreshment / Hydration Stall"><span>Refreshment / Hydration Stall</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Scoring"><span>Scoring</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Security"><span>Security</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Management Facilitation"><span>Management Facilitation</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Marketing"><span>Marketing</span></label>
+          </div>
+          <div class="field-error">Please pick exactly two.</div>
+          <div style="font-size:.85rem;color:var(--gray-text);margin-top:8px;">These are preferences only — Studera will place volunteers according to the needs of the event.</div>
+        </div>
+        <div class="consent-box" style="margin-top:16px;">
+          <label>
+            <input type="checkbox" id="volunteer-consent" data-req>
+            <span>I'd like to volunteer at the Studera Grand Slam. I understand Studera may verify my details and reserves the right to adjust volunteer roles at its discretion. My information will be used solely to coordinate my participation and stay in touch about the event.</span>
+          </label>
+          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SPECTATOR ============ -->
+    <div class="category-body" id="body-spectator">
+      <div class="info-box">
+        <h3>Spectator — Important Information</h3>
+        <div class="row"><b>Entry Fee:</b>&nbsp;100 PKR for both days</div>
+        <p>Your ticket gives you access to both days of the Grand Slam. You may also purchase from the refreshment / hydration stalls and the coffee vendor on-site.</p>
+      </div>
+
+      <div id="spectator-player"></div>
+
+      <div class="section-card">
+        <div class="consent-box">
+          <label>
+            <input type="checkbox" id="spectator-consent" data-req>
+            <span>I'd like to attend the Studera Grand Slam as a spectator. I understand Studera reserves the right to manage entry at its discretion, and my details will be used solely to coordinate my attendance and stay in touch about the event.</span>
+          </label>
+          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn" style="display:none;">Submit Registration →</button>
+    <div id="error-msg">Something went wrong while submitting. Please check your connection and try again.</div>
+  </form>
+
+  <div id="success-msg">
+    <h2>Thank you for registering! 🎉</h2>
+    <p>Studera's team will contact you soon. Please look out for an email from <span class="mail">studera.global@gmail.com</span> and keep an eye on your WhatsApp regularly as well.</p>
   </div>
 </div>
 
-      <!-- 1.5 Country -->
-      <div class="form-group" data-required="true">
-        <label class="field-label" for="country">Country of Residence <span class="req">*</span></label>
-        <input type="text" id="country" name="country" placeholder="e.g. Pakistan" />
-        <div class="field-error" id="err-country">Please enter your country of residence.</div>
-      </div>
-
-      <!-- 1.6 Current Status -->
-      <div class="form-group" data-required="true">
-        <label class="field-label">Current Status <span class="req">*</span></label>
-        <div class="radio-group" id="statusGroup">
-          <label class="radio-option">
-            <input type="radio" name="status" value="High School Student" /> High School Student
-          </label>
-          <label class="radio-option">
-            <input type="radio" name="status" value="University Student" /> University Student
-          </label>
-        </div>
-        <div class="field-error" id="err-status">Please select your current status.</div>
-      </div>
-    </div><!-- /section 1 -->
-
-    <!-- ══ BRANCH A: HIGH SCHOOL ══ -->
-    <div id="branch-a">
-      <div class="section-card">
-        <div class="section-title">
-          <span class="section-badge">Branch A</span> High School Student
-        </div>
-
-        <!-- A.1 Grade -->
-        <div class="form-group" data-required="true" data-branch="a">
-          <label class="field-label">What grade are you currently in? <span class="req">*</span></label>
-          <div class="radio-group" id="gradeGroup">
-            <label class="radio-option"><input type="radio" name="grade" value="Grade 9" /> Grade 9</label>
-            <label class="radio-option"><input type="radio" name="grade" value="Grade 10" /> Grade 10</label>
-            <label class="radio-option"><input type="radio" name="grade" value="Grade 11" /> Grade 11</label>
-            <label class="radio-option"><input type="radio" name="grade" value="Grade 12" /> Grade 12</label>
-          </div>
-          <div class="field-error" id="err-grade">Please select your grade.</div>
-        </div>
-
-        <!-- A.2 School name -->
-        <div class="form-group" data-required="true" data-branch="a">
-          <label class="field-label" for="schoolName">What is the name of your school? <span class="req">*</span></label>
-          <input type="text" id="schoolName" name="schoolName" placeholder="Your school name" />
-          <div class="field-error" id="err-schoolName">Please enter your school name.</div>
-        </div>
-
-        <!-- A.3 Received counselling -->
-        <div class="form-group" data-required="true" data-branch="a">
-          <label class="field-label">Have you ever received college counselling from any source? <span class="req">*</span></label>
-          <div class="radio-group" id="receivedCounsellingGroup">
-            <label class="radio-option"><input type="radio" name="receivedCounselling" value="Yes" /> Yes</label>
-            <label class="radio-option"><input type="radio" name="receivedCounselling" value="No" /> No</label>
-          </div>
-          <div class="field-error" id="err-receivedCounselling">Please select an option.</div>
-        </div>
-
-        <!-- A.4 Where from (conditional on A.3 = Yes) -->
-        <div class="conditional-block" id="a4-block">
-          <div class="form-group" data-branch="a">
-            <label class="field-label">Where did you receive college counselling from? <span class="opt">(select all that apply)</span></label>
-            <div class="checkbox-group" id="counsellingSourceGroup">
-              <label class="checkbox-option"><input type="checkbox" name="counsellingSource" value="My school counsellor" /> My school counsellor</label>
-              <label class="checkbox-option"><input type="checkbox" name="counsellingSource" value="A private college counsellor (paid)" /> A private college counsellor (paid)</label>
-              <label class="checkbox-option"><input type="checkbox" name="counsellingSource" value="A non-profit or community organisation" /> A non-profit or community organisation</label>
-              <label class="checkbox-option"><input type="checkbox" name="counsellingSource" value="An online platform or service" /> An online platform or service</label>
-              <label class="checkbox-option" id="sourceOtherLabel">
-                <input type="checkbox" name="counsellingSource" value="Other" id="sourceOtherCheck" /> Other (please specify)
-                <input type="text" class="other-input" id="sourceOtherText" name="counsellingSourceOther" placeholder="Please specify…" style="display:none;" />
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- A.5 Effectiveness (conditional on A.3 = Yes) -->
-        <div class="conditional-block" id="a5-block">
-          <div class="form-group" data-required="true" data-branch="a" data-conditional="a3yes">
-            <label class="field-label">How effective was the counselling you received? <span class="req">*</span></label>
-            <div class="radio-group" id="counsellingEffectivenessGroup">
-              <label class="radio-option"><input type="radio" name="counsellingEffectiveness" value="Very ineffective" /> Very ineffective</label>
-              <label class="radio-option"><input type="radio" name="counsellingEffectiveness" value="Somewhat ineffective" /> Somewhat ineffective</label>
-              <label class="radio-option"><input type="radio" name="counsellingEffectiveness" value="Neutral" /> Neutral</label>
-              <label class="radio-option"><input type="radio" name="counsellingEffectiveness" value="Somewhat effective" /> Somewhat effective</label>
-              <label class="radio-option"><input type="radio" name="counsellingEffectiveness" value="Very effective" /> Very effective</label>
-            </div>
-            <div class="field-error" id="err-counsellingEffectiveness">Please select an option.</div>
-          </div>
-        </div>
-
-        <!-- A.6 Generic advice (conditional on A.3 = Yes) -->
-        <div class="conditional-block" id="a6-block">
-          <div class="form-group" data-required="true" data-branch="a" data-conditional="a3yes">
-            <label class="field-label">Did the counsellor give you generic advice that felt the same as what other students received? <span class="req">*</span></label>
-            <div class="radio-group" id="genericAdviceGroup">
-              <label class="radio-option"><input type="radio" name="genericAdvice" value="Yes" /> Yes</label>
-              <label class="radio-option"><input type="radio" name="genericAdvice" value="No" /> No</label>
-              <label class="radio-option"><input type="radio" name="genericAdvice" value="Not sure" /> Not sure</label>
-            </div>
-            <div class="field-error" id="err-genericAdvice">Please select an option.</div>
-          </div>
-        </div>
-
-        <!-- A.7 Dream university -->
-        <div class="form-group" data-required="true" data-branch="a">
-          <label class="field-label">Do you have a specific dream university and major in mind? <span class="req">*</span></label>
-          <div class="radio-group" id="dreamUniversityGroup">
-            <label class="radio-option"><input type="radio" name="dreamUniversity" value="Yes" /> Yes</label>
-            <label class="radio-option"><input type="radio" name="dreamUniversity" value="No" /> No</label>
-          </div>
-          <div class="field-error" id="err-dreamUniversity">Please select an option.</div>
-        </div>
-
-        <!-- A.8 Undergrad mentor help (conditional on A.7 = Yes) -->
-        <div class="conditional-block" id="a8-block">
-          <div class="form-group" data-required="true" data-branch="a" data-conditional="a7yes">
-            <label class="field-label">Do you believe that being connected with a current undergraduate student from that exact university and major would help you get in? <span class="req">*</span></label>
-            <div class="radio-group" id="mentorHelpGroup">
-              <label class="radio-option"><input type="radio" name="mentorHelp" value="Yes" /> Yes</label>
-              <label class="radio-option"><input type="radio" name="mentorHelp" value="No" /> No</label>
-              <label class="radio-option"><input type="radio" name="mentorHelp" value="Not sure" /> Not sure</label>
-            </div>
-            <div class="field-error" id="err-mentorHelp">Please select an option.</div>
-          </div>
-        </div>
-
-        <!-- A.9 Prefer context-specific mentor -->
-        <div class="form-group" data-required="true" data-branch="a">
-          <label class="field-label">Would you prefer guidance on essays, extracurriculars, and scholarships from a mentor who is already a student at your dream university and belongs to a similar context as you rather than a generic counsellor? <span class="req">*</span></label>
-          <div class="radio-group" id="preferMentorGroup">
-            <label class="radio-option"><input type="radio" name="preferMentor" value="Yes" /> Yes</label>
-            <label class="radio-option"><input type="radio" name="preferMentor" value="No" /> No</label>
-          </div>
-          <div class="field-error" id="err-preferMentor">Please select an option.</div>
-        </div>
-
-      </div>
-    </div><!-- /branch-a -->
-
-    <!-- ══ BRANCH B: UNIVERSITY STUDENT ══ -->
-    <div id="branch-b">
-      <div class="section-card">
-        <div class="section-title">
-          <span class="section-badge">Branch B</span> University Student
-        </div>
-
-        <!-- B.1 Year -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label">What year of university are you currently in? <span class="req">*</span></label>
-          <div class="radio-group" id="uniYearGroup">
-            <label class="radio-option"><input type="radio" name="uniYear" value="First year" /> First year</label>
-            <label class="radio-option"><input type="radio" name="uniYear" value="Second year" /> Second year</label>
-            <label class="radio-option"><input type="radio" name="uniYear" value="Third year" /> Third year</label>
-            <label class="radio-option"><input type="radio" name="uniYear" value="Fourth year" /> Fourth year</label>
-            <label class="radio-option"><input type="radio" name="uniYear" value="Fifth year or higher" /> Fifth year or higher</label>
-          </div>
-          <div class="field-error" id="err-uniYear">Please select your year.</div>
-        </div>
-
-        <!-- B.2 University name -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label" for="uniName">What is the name of your university? <span class="req">*</span></label>
-          <input type="text" id="uniName" name="uniName" placeholder="Your university name" />
-          <div class="field-error" id="err-uniName">Please enter your university name.</div>
-        </div>
-
-        <!-- B.3 Major -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label" for="major">What is your major or programme of study? <span class="req">*</span></label>
-          <input type="text" id="major" name="major" placeholder="e.g. Computer Science" />
-          <div class="field-error" id="err-major">Please enter your major.</div>
-        </div>
-
-        <!-- B.4 Country applied from -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label" for="appliedFromCountry">What country did you apply from when you were admitted to university? <span class="req">*</span></label>
-          <input type="text" id="appliedFromCountry" name="appliedFromCountry" placeholder="e.g. Pakistan" />
-          <div class="field-error" id="err-appliedFromCountry">Please enter the country.</div>
-        </div>
-
-        <!-- B.5 Schooling system -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label">What was your high school schooling system? <span class="req">*</span></label>
-          <div class="radio-group" id="schoolingSystemGroup">
-            <label class="radio-option"><input type="radio" name="schoolingSystem" value="IB (International Baccalaureate)" /> IB (International Baccalaureate)</label>
-            <label class="radio-option"><input type="radio" name="schoolingSystem" value="A-Levels / Cambridge" /> A-Levels / Cambridge</label>
-            <label class="radio-option"><input type="radio" name="schoolingSystem" value="American System / AP" /> American System / AP</label>
-            <label class="radio-option"><input type="radio" name="schoolingSystem" value="French Baccalaureate" /> French Baccalaureate</label>
-            <label class="radio-option"><input type="radio" name="schoolingSystem" value="Pakistani Matric / Intermediate" /> Pakistani Matric / Intermediate</label>
-            <label class="radio-option"><input type="radio" name="schoolingSystem" value="Indian CBSE / ISC" /> Indian CBSE / ISC</label>
-            <label class="radio-option" id="schoolSystemOtherLabel" style="flex-direction:column;align-items:flex-start;">
-               <span style="display:flex;align-items:center;gap:10px;"><input type="radio" name="schoolingSystem" value="Other" id="schoolSystemOtherRadio" /> Other (please specify)</span>
-               <input type="text" class="other-input" id="schoolSystemOtherText" name="schoolingSystemOther" placeholder="Please specify your schooling system..." style="display:none;width:100%;margin-top:10px;" />
-         </label>
-          </div>
-          <div class="field-error" id="err-schoolingSystem">Please select your schooling system.</div>
-        </div>
-
-        <!-- B.6 Received counselling -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label">Did you receive college counselling when you were applying to university? <span class="req">*</span></label>
-          <div class="radio-group" id="b6Group">
-            <label class="radio-option"><input type="radio" name="b6counselling" value="Yes" /> Yes</label>
-            <label class="radio-option"><input type="radio" name="b6counselling" value="No" /> No</label>
-          </div>
-          <div class="field-error" id="err-b6counselling">Please select an option.</div>
-        </div>
-
-        <!-- B.7 Generic (conditional on B.6 = Yes) -->
-        <div class="conditional-block" id="b7-block">
-          <div class="form-group" data-required="true" data-branch="b" data-conditional="b6yes">
-            <label class="field-label">Did you find the counselling to be generic and not specific to your dream university and major? <span class="req">*</span></label>
-            <div class="radio-group" id="b7Group">
-              <label class="radio-option"><input type="radio" name="b7generic" value="Yes" /> Yes</label>
-              <label class="radio-option"><input type="radio" name="b7generic" value="No" /> No</label>
-            </div>
-            <div class="field-error" id="err-b7generic">Please select an option.</div>
-          </div>
-        </div>
-
-        <!-- B.8 Would undergrad mentor have helped -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label">Do you believe that if you had been guided by a current undergraduate student from your dream university and major, it would have increased your chances of getting in? <span class="req">*</span></label>
-          <div class="radio-group" id="b8Group">
-            <label class="radio-option"><input type="radio" name="b8mentorChances" value="Yes" /> Yes</label>
-            <label class="radio-option"><input type="radio" name="b8mentorChances" value="No" /> No</label>
-            <label class="radio-option"><input type="radio" name="b8mentorChances" value="Not sure" /> Not sure</label>
-          </div>
-          <div class="field-error" id="err-b8mentorChances">Please select an option.</div>
-        </div>
-
-        <!-- B.9 Interested in mentoring -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label">Would you be interested in mentoring current high school students who share your university, major, country of origin, and schooling system? <span class="req">*</span></label>
-          <div class="radio-group" id="b9Group">
-            <label class="radio-option"><input type="radio" name="b9mentor" value="Yes" /> Yes</label>
-            <label class="radio-option"><input type="radio" name="b9mentor" value="No" /> No</label>
-          </div>
-          <div class="field-error" id="err-b9mentor">Please select an option.</div>
-        </div>
-
-        <!-- B.10 Hourly rate (conditional on B.9 = Yes) -->
-        <div class="conditional-block" id="b10-block">
-          <div class="form-group" data-required="true" data-branch="b" data-conditional="b9yes">
-            <label class="field-label">What hourly rate do you believe is fair for you to receive as a mentor? <span class="req">*</span></label>
-            <div class="radio-group" id="b10Group">
-              <label class="radio-option"><input type="radio" name="b10rate" value="$7 per hour" /> $7 per hour</label>
-              <label class="radio-option"><input type="radio" name="b10rate" value="$8 per hour" /> $8 per hour</label>
-              <label class="radio-option"><input type="radio" name="b10rate" value="$9 per hour" /> $9 per hour</label>
-              <label class="radio-option"><input type="radio" name="b10rate" value="$10 per hour" /> $10 per hour</label>
-              <label class="radio-option"><input type="radio" name="b10rate" value="$11 per hour" /> $11 per hour</label>
-              <label class="radio-option"><input type="radio" name="b10rate" value="$12 per hour" /> $12 per hour</label>
-              <label class="radio-option"><input type="radio" name="b10rate" value="$13 per hour" /> $13 per hour</label>
-              <label class="radio-option"><input type="radio" name="b10rate" value="$14 per hour" /> $14 per hour</label>
-            </div>
-            <div class="field-error" id="err-b10rate">Please select a rate.</div>
-          </div>
-        </div>
-
-        <!-- B.11 Willingness to pay -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label">How much would you have been willing to pay per hour for a mentor from your dream university and major when you were applying? <span class="req">*</span></label>
-          <div class="radio-group" id="b11Group">
-            <label class="radio-option"><input type="radio" name="b11willingness" value="$7 - $14 per hour" /> $7 – $14 per hour</label>
-            <label class="radio-option"><input type="radio" name="b11willingness" value="$15 - $20 per hour" /> $15 – $20 per hour</label>
-            <label class="radio-option"><input type="radio" name="b11willingness" value="$21 - $30 per hour" /> $21 – $30 per hour</label>
-            <label class="radio-option"><input type="radio" name="b11willingness" value="More than $30 per hour" /> More than $30 per hour</label>
-          </div>
-          <div class="field-error" id="err-b11willingness">Please select an option.</div>
-        </div>
-
-        <!-- B.12 Benefit from specific mentor -->
-        <div class="form-group" data-required="true" data-branch="b">
-          <label class="field-label">Do you think high school students would benefit more from a mentor who is an undergrad student at their prospective university and major and shares their specific (academic and demographic) background compared to a traditional counsellor? <span class="req">*</span></label>
-          <div class="radio-group" id="b12Group">
-            <label class="radio-option"><input type="radio" name="b12benefit" value="Yes" /> Yes</label>
-            <label class="radio-option"><input type="radio" name="b12benefit" value="No" /> No</label>
-          </div>
-          <div class="field-error" id="err-b12benefit">Please select an option.</div>
-        </div>
-
-      </div>
-    </div><!-- /branch-b -->
-
-    <!-- ══ SECTION 3: CLOSING ══ -->
-    <div class="section-card" id="section3">
-      <div class="section-title">
-        <span class="section-badge">Section 3</span> Closing
-      </div>
-
-      <!-- 3.1 Beta sign-up -->
-      <div class="form-group" data-required="true">
-        <label class="field-label">Studera will be introduced in its first pilot phase for beta testing soon. Would you be interested to sign up as a mentor or mentee for our beta testing phase? This will help us gather data to build our app to perfection. <span class="req">*</span></label>
-        <div class="radio-group" id="betaGroup">
-          <label class="radio-option"><input type="radio" name="betaInterest" value="Yes" /> Yes</label>
-          <label class="radio-option"><input type="radio" name="betaInterest" value="No" /> No</label>
-        </div>
-        <div class="field-error" id="err-betaInterest">Please select an option.</div>
-      </div>
-
-      <!-- 3.2 Sign up at launch -->
-      <div class="form-group" data-required="false">
-        <label class="field-label">When Studera officially launches, do you see yourself signing up as a mentor or mentee? If yes, please confirm your email so that we can share updates </label>
-        <div class="radio-group" id="launchGroup">
-          <label class="radio-option"><input type="radio" name="launchSignup" value="Yes" /> Yes</label>
-          <label class="radio-option"><input type="radio" name="launchSignup" value="No" /> No</label>
-        </div>
-        <div class="conditional-block" id="launch-email-block">
-          <div class="form-group" style="margin-top:12px;margin-bottom:0;">
-            <label class="field-label" for="launchEmail">Confirm your email <span class="req">*</span></label>
-            <input type="email" id="launchEmail" name="launchEmail" placeholder="you@example.com" />
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /section 3 -->
-
-    <button type="submit" class="submit-btn" id="submitBtn">Submit Survey →</button>
-
-    <div id="success-msg">🎉 Thank you for your response. Your input will help shape Studera.</div>
-    <div id="error-msg">⚠️ Submission failed. Please check your internet connection and try again.</div>
-
-  </form>
-</div><!-- /form-wrapper -->
-
-<footer><span>© 2026 Studera. All rights reserved.</span></footer>
-
-<!-- ══════════════════════════════════════════════════════════════
-     GOOGLE APPS SCRIPT CODE
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     HOW TO SET UP:
-     1. Go to https://sheets.google.com and create a new Google Sheet.
-        Name it "Studera Survey Responses".
-     2. Click "Extensions" in the top menu → "Apps Script".
-     3. Delete ALL existing code in the editor.
-     4. Copy the code below (between the dashes) and paste it in.
-     5. Click "Save" (floppy disk icon).
-     6. Click "Deploy" → "New deployment".
-     7. Click the gear icon next to "Type" → select "Web app".
-     8. Set "Execute as" → Me.
-        Set "Who has access" → Anyone.
-     9. Click "Deploy". Copy the URL provided.
-     10. Paste that URL below where it says PASTE_YOUR_URL_HERE.
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-function doPost(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
-
-    // Build header row on first submission
-    if (sheet.getLastRow() === 0) {
-      var headers = Object.keys(data);
-      headers.unshift("Timestamp");
-      sheet.appendRow(headers);
-    }
-
-    // Build data row
-    var row = [new Date()];
-    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    for (var i = 1; i < headers.length; i++) {
-      row.push(data[headers[i]] !== undefined ? data[headers[i]] : "");
-    }
-    sheet.appendRow(row);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: "success" }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch(err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: "error", message: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
-══════════════════════════════════════════════════════════════ -->
+<footer>Studera Grand Slam · 25–26 July 2025 · The International School, DHA Phase 2</footer>
 
 <script>
-// ── PASTE YOUR GOOGLE APPS SCRIPT URL HERE ──
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlJ4OPMNPjvThs1-BZp3NrezK4MF7PkLGtQSTuEAtTcLMCPqbycXnPzaBDASKgwwvm/exec";
+// ============================================================
+// CONFIG — paste your deployed Google Apps Script URL here
+// ============================================================
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7IIpP7736vsQ3il4lAJJiwq7yO-yZP-CyseSesCrJdgOncnj38A4tRsi06_SsCaTP/exec';
 
-// ─────────────────────────────────────────────
-// BRANCH SWITCHING
-// ─────────────────────────────────────────────
-const statusRadios = document.querySelectorAll('input[name="status"]');
-const branchA = document.getElementById('branch-a');
-const branchB = document.getElementById('branch-b');
+let currentCat = null;
 
-statusRadios.forEach(radio => {
-  radio.addEventListener('change', () => {
-    const val = radio.value;
-    if (val === 'High School Student') {
-      branchA.classList.add('active');
-      branchB.classList.remove('active');
-      // Reset branch B conditionals
-      hideBlock('b7-block');
-      hideBlock('b10-block');
-    } else if (val === 'University Student') {
-      branchB.classList.add('active');
-      branchA.classList.remove('active');
-      // Reset branch A conditionals
-      hideBlock('a4-block');
-      hideBlock('a5-block');
-      hideBlock('a6-block');
-      hideBlock('a8-block');
-    }
-    updateProgress();
-  });
-});
+// ---------- Player block template ----------
+// opts: {prefix, index, label, badge, showPaddle, showCategory, categoryValue, lockCategory, captainEmail}
+function playerBlock(o){
+  const p = o.prefix;
+  const idBase = p + '-p' + o.index;
+  let badge = '';
+  if(o.badge === 'captain') badge = '<span class="captain-badge">Team Captain</span>';
+  else if(o.badge === 'sub') badge = '<span class="sub-badge">Substitute</span>';
+  else if(o.badge === 'lineup') badge = '<span class="lineup-badge">Lineup</span>';
 
-// ─────────────────────────────────────────────
-// CONDITIONAL BLOCK HELPERS
-// ─────────────────────────────────────────────
-function showBlock(id) {
-  const el = document.getElementById(id);
-  if (el) { el.classList.add('visible'); }
-}
-function hideBlock(id) {
-  const el = document.getElementById(id);
-  if (el) { el.classList.remove('visible'); }
-}
+  const captainEmail = o.captainEmail ? `
+    <div class="form-group">
+      <label class="field-label" for="${idBase}-email">Email Address <span class="hint">(we'll use this for payment &amp; updates)</span> <span class="req">*</span></label>
+      <input type="email" id="${idBase}-email" data-req placeholder="captain@example.com">
+      <div class="field-error">Please enter a valid email address.</div>
+    </div>` : '';
 
-// A.3 → A.4, A.5, A.6
-document.querySelectorAll('input[name="receivedCounselling"]').forEach(r => {
-  r.addEventListener('change', () => {
-    if (r.value === 'Yes') {
-      showBlock('a4-block'); showBlock('a5-block'); showBlock('a6-block');
-    } else {
-      hideBlock('a4-block'); hideBlock('a5-block'); hideBlock('a6-block');
-      document.querySelectorAll('input[name="counsellingEffectiveness"]').forEach(x => x.checked = false);
-      document.querySelectorAll('input[name="genericAdvice"]').forEach(x => x.checked = false);
-    }
-    updateProgress();
-  });
-});
+  const paddle = o.showPaddle ? `
+    <div class="form-group">
+      <label class="field-label">Will you be using your own paddle equipment? <span class="req">*</span></label>
+      <div class="radio-group radio-row" data-radio="${idBase}-paddle">
+        <label class="radio-option"><input type="radio" name="${idBase}-paddle" value="Yes"><span>Yes</span></label>
+        <label class="radio-option"><input type="radio" name="${idBase}-paddle" value="No"><span>No</span></label>
+      </div>
+      <div class="field-error">Please choose one.</div>
+    </div>` : '';
 
-// A.7 → A.8
-document.querySelectorAll('input[name="dreamUniversity"]').forEach(r => {
-  r.addEventListener('change', () => {
-    if (r.value === 'Yes') { showBlock('a8-block'); }
-    else {
-      hideBlock('a8-block');
-      document.querySelectorAll('input[name="mentorHelp"]').forEach(x => x.checked = false);
-    }
-    updateProgress();
-  });
-});
+  const category = o.showCategory ? `
+    <div class="form-group">
+      <label class="field-label">Player Category</label>
+      <input type="text" id="${idBase}-catfield" class="locked" value="${o.categoryValue}" readonly>
+    </div>` : '';
 
-// B.6 → B.7
-document.querySelectorAll('input[name="b6counselling"]').forEach(r => {
-  r.addEventListener('change', () => {
-    if (r.value === 'Yes') { showBlock('b7-block'); }
-    else {
-      hideBlock('b7-block');
-      document.querySelectorAll('input[name="b7generic"]').forEach(x => x.checked = false);
-    }
-    updateProgress();
-  });
-});
-
-// B.9 → B.10
-document.querySelectorAll('input[name="b9mentor"]').forEach(r => {
-  r.addEventListener('change', () => {
-    if (r.value === 'Yes') { showBlock('b10-block'); }
-    else {
-      hideBlock('b10-block');
-      document.querySelectorAll('input[name="b10rate"]').forEach(x => x.checked = false);
-    }
-    updateProgress();
-  });
-});
-
-// 3.2 launch email
-document.querySelectorAll('input[name="launchSignup"]').forEach(r => {
-  r.addEventListener('change', () => {
-    if (r.value === 'Yes') {
-      showBlock('launch-email-block');
-      // Pre-fill from 1.3
-      const emailVal = document.getElementById('email').value;
-      if (emailVal) document.getElementById('launchEmail').value = emailVal;
-    } else {
-      hideBlock('launch-email-block');
-    }
-    updateProgress();
-  });
-});
-
-// "Other" checkbox for A.4
-document.getElementById('sourceOtherCheck').addEventListener('change', function() {
-  document.getElementById('sourceOtherText').style.display = this.checked ? 'block' : 'none';
-});
-
-// "Other" radio for B.5
-document.getElementById('schoolSystemOtherRadio').addEventListener('change', function() {
-  document.getElementById('schoolSystemOtherText').style.display = this.checked ? 'block' : 'none';
-});
-document.querySelectorAll('input[name="schoolingSystem"]').forEach(r => {
-  r.addEventListener('change', function() {
-    if (this.value !== 'Other') {
-      document.getElementById('schoolSystemOtherText').style.display = 'none';
-    }
-  });
-});
-
-// Highlight selected radio/checkbox
-document.querySelectorAll('.radio-option input, .checkbox-option input').forEach(input => {
-  input.addEventListener('change', function() {
-    if (this.type === 'radio') {
-      const group = this.closest('.radio-group');
-      if (group) group.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
-    }
-    const parent = this.closest('.radio-option, .checkbox-option');
-    if (parent) {
-      if (this.type === 'checkbox') {
-        parent.classList.toggle('selected', this.checked);
-      } else {
-        parent.classList.add('selected');
-      }
-    }
-    updateProgress();
-  });
-});
-
-// Text inputs also trigger progress
-document.querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="tel"]').forEach(inp => {
-  inp.addEventListener('input', updateProgress);
-});
-
-// ─────────────────────────────────────────────
-// PROGRESS BAR
-// ─────────────────────────────────────────────
-function getActiveStatus() {
-  const r = document.querySelector('input[name="status"]:checked');
-  return r ? r.value : null;
+  return `
+  <div class="section-card" data-player="${idBase}">
+    <div class="section-title">Player ${o.index} ${badge}</div>
+    <div class="form-group">
+      <label class="field-label" for="${idBase}-name">Name <span class="req">*</span></label>
+      <input type="text" id="${idBase}-name" data-req placeholder="Full name">
+      <div class="field-error">Please enter a name.</div>
+    </div>
+    ${captainEmail}
+    <div class="form-group">
+      <label class="field-label" for="${idBase}-age">Age <span class="req">*</span></label>
+      <input type="number" id="${idBase}-age" data-req min="1" max="100" placeholder="e.g. 19">
+      <div class="field-error">Please enter a valid age.</div>
+    </div>
+    <div class="form-group">
+      <label class="field-label">Gender <span class="req">*</span></label>
+      <div class="radio-group radio-row" data-radio="${idBase}-gender">
+        <label class="radio-option"><input type="radio" name="${idBase}-gender" value="Male"><span>Male</span></label>
+        <label class="radio-option"><input type="radio" name="${idBase}-gender" value="Female"><span>Female</span></label>
+        <label class="radio-option"><input type="radio" name="${idBase}-gender" value="Other"><span>Other</span></label>
+      </div>
+      <div class="field-error">Please select a gender.</div>
+    </div>
+    <div class="form-group">
+      <label class="field-label" for="${idBase}-phone">Phone Number <span class="hint">(11 digits, e.g. 03001234567)</span> <span class="req">*</span></label>
+      <input type="tel" id="${idBase}-phone" data-req inputmode="numeric" maxlength="11" placeholder="03001234567">
+      <div class="field-error">Enter exactly 11 digits — no spaces, no country code.</div>
+    </div>
+    <div class="form-group">
+      <label class="field-label" for="${idBase}-nic">National Identity Card (NIC) Number <span class="req">*</span></label>
+      <input type="text" id="${idBase}-nic" data-req inputmode="numeric" maxlength="15" placeholder="e.g. 42101-1234567-1">
+      <div class="field-error">Enter a valid 13-digit CNIC number.</div>
+    </div>
+    ${category}
+    <div class="form-group">
+      <label class="field-label">Profession <span class="req">*</span></label>
+      <div class="radio-group radio-row" data-radio="${idBase}-prof">
+        <label class="radio-option"><input type="radio" name="${idBase}-prof" value="Work"><span>Work</span></label>
+        <label class="radio-option"><input type="radio" name="${idBase}-prof" value="Student"><span>Student</span></label>
+        <label class="radio-option"><input type="radio" name="${idBase}-prof" value="Other"><span>Other</span></label>
+      </div>
+      <div class="field-error">Please choose one.</div>
+      <input type="text" class="other-input" id="${idBase}-prof-other" placeholder="Please specify your profession">
+      <div class="conditional-block" id="${idBase}-student-block" style="margin-top:10px;">
+        <label class="field-label" for="${idBase}-uni">Name of University / High School <span class="req">*</span></label>
+        <input type="text" id="${idBase}-uni" placeholder="Institution name">
+        <div class="field-error">Please specify your institution.</div>
+      </div>
+    </div>
+    ${paddle}
+  </div>`;
 }
 
-function updateProgress() {
-  const status = getActiveStatus();
-
-  // All required fields definition
-  const coreFields = [
-    { type: 'text', id: 'fullName' },
-    { type: 'number', id: 'age' },
-    { type: 'email', id: 'email' },
-    { type: 'text', id: 'country' },
-    { type: 'radio', name: 'status' },
-  ];
-
-  const branchAFields = [
-    { type: 'radio', name: 'grade' },
-    { type: 'text', id: 'schoolName' },
-    { type: 'radio', name: 'receivedCounselling' },
-    { type: 'radio', name: 'dreamUniversity' },
-    { type: 'radio', name: 'preferMentor' },
-  ];
-
-  const branchAConditional = [
-    { type: 'radio', name: 'counsellingEffectiveness', condition: () => isChecked('receivedCounselling', 'Yes') },
-    { type: 'radio', name: 'genericAdvice', condition: () => isChecked('receivedCounselling', 'Yes') },
-    { type: 'radio', name: 'mentorHelp', condition: () => isChecked('dreamUniversity', 'Yes') },
-  ];
-
-  const branchBFields = [
-    { type: 'radio', name: 'uniYear' },
-    { type: 'text', id: 'uniName' },
-    { type: 'text', id: 'major' },
-    { type: 'text', id: 'appliedFromCountry' },
-    { type: 'radio', name: 'schoolingSystem' },
-    { type: 'radio', name: 'b6counselling' },
-    { type: 'radio', name: 'b8mentorChances' },
-    { type: 'radio', name: 'b9mentor' },
-    { type: 'radio', name: 'b11willingness' },
-    { type: 'radio', name: 'b12benefit' },
-  ];
-
-  const branchBConditional = [
-    { type: 'radio', name: 'b7generic', condition: () => isChecked('b6counselling', 'Yes') },
-    { type: 'radio', name: 'b10rate', condition: () => isChecked('b9mentor', 'Yes') },
-  ];
-
-  const closingFields = [
-    { type: 'radio', name: 'betaInterest' },
-  ];
-
-  let fields = [...coreFields];
-  if (status === 'High School Student') {
-    fields = [...fields, ...branchAFields, ...branchAConditional.filter(f => f.condition())];
-  } else if (status === 'University Student') {
-    fields = [...fields, ...branchBFields, ...branchBConditional.filter(f => f.condition())];
-  }
-  fields = [...fields, ...closingFields];
-
-  const total = fields.length;
-  let done = 0;
-
-  fields.forEach(f => {
-    if (f.type === 'radio') {
-      if (document.querySelector(`input[name="${f.name}"]:checked`)) done++;
-    } else if (f.type === 'text' || f.type === 'email' || f.type === 'number') {
-      const el = document.getElementById(f.id);
-      if (el && el.value.trim() !== '') done++;
-    }
-  });
-
-  const pct = total === 0 ? 0 : Math.round((done / total) * 100);
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-label').textContent = pct + '%';
+// ---------- Render players for each category ----------
+function renderPadel(){
+  const host = document.getElementById('padel-players');
+  host.innerHTML =
+    playerBlock({prefix:'padel',index:1,badge:'captain',showPaddle:true,captainEmail:true}) +
+    playerBlock({prefix:'padel',index:2,showPaddle:true});
+  wireBlocks(host);
 }
 
-function isChecked(name, value) {
-  const r = document.querySelector(`input[name="${name}"]:checked`);
-  return r && r.value === value;
-}
-
-// ─────────────────────────────────────────────
-// FORM SUBMISSION
-// ─────────────────────────────────────────────
-document.getElementById('survey-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  if (!validateForm()) return;
-
-  const status = getActiveStatus();
-
-  const data = {
-    // Section 1
-    fullName: val('fullName'),
-    age: val('age'),
-    email: val('email'),
-    phone: val('phone'),
-    country: val('country'),
-    status: radio('status'),
-  };
-
-  if (status === 'High School Student') {
-    data.grade = radio('grade');
-    data.schoolName = val('schoolName');
-    data.receivedCounselling = radio('receivedCounselling');
-    if (isChecked('receivedCounselling', 'Yes')) {
-      data.counsellingSource = checkboxValues('counsellingSource');
-      data.counsellingSourceOther = val('sourceOtherText');
-      data.counsellingEffectiveness = radio('counsellingEffectiveness');
-      data.genericAdvice = radio('genericAdvice');
-    }
-    data.dreamUniversity = radio('dreamUniversity');
-    if (isChecked('dreamUniversity', 'Yes')) {
-      data.mentorHelp = radio('mentorHelp');
-    }
-    data.preferMentor = radio('preferMentor');
-  }
-
-  if (status === 'University Student') {
-    data.uniYear = radio('uniYear');
-    data.uniName = val('uniName');
-    data.major = val('major');
-    data.appliedFromCountry = val('appliedFromCountry');
-    data.schoolingSystem = radio('schoolingSystem');
-    data.schoolingSystemOther = val('schoolSystemOtherText');
-    data.b6counselling = radio('b6counselling');
-    if (isChecked('b6counselling', 'Yes')) {
-      data.b7generic = radio('b7generic');
-    }
-    data.b8mentorChances = radio('b8mentorChances');
-    data.b9mentor = radio('b9mentor');
-    if (isChecked('b9mentor', 'Yes')) {
-      data.b10rate = radio('b10rate');
-    }
-    data.b11willingness = radio('b11willingness');
-    data.b12benefit = radio('b12benefit');
-  }
-
-  // Section 3
-  data.betaInterest = radio('betaInterest');
-  data.launchSignup = radio('launchSignup');
-  if (isChecked('launchSignup', 'Yes')) {
-    data.launchEmail = val('launchEmail');
-  }
-
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting…';
-
-  // If URL not configured, show a test message
-  if (GOOGLE_SCRIPT_URL === 'PASTE_YOUR_URL_HERE') {
-    console.log('Form data (not yet sent — add Google Script URL):', data);
-    showSuccess();
-    return;
-  }
-
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+function renderFutsal(size){
+  const host = document.getElementById('futsal-players');
+  host.innerHTML = '';
+  if(!size){ document.getElementById('futsal-consent-card').style.display='none'; return; }
+  let html = '';
+  for(let i=1;i<=size;i++){
+    const isSub = i>5;
+    html += playerBlock({
+      prefix:'futsal', index:i,
+      badge: i===1 ? 'captain' : (isSub ? 'sub' : 'lineup'),
+      showCategory:true,
+      categoryValue: isSub ? 'Substitute' : 'Lineup',
+      captainEmail: i===1
     });
+  }
+  host.innerHTML = html;
+  document.getElementById('futsal-consent-card').style.display='block';
+  wireBlocks(host);
+}
+
+function renderSingle(hostId, prefix){
+  const host = document.getElementById(hostId);
+  const includeNic = prefix !== 'volunteer' ? true : true; // both collect NIC per spec
+  host.innerHTML = playerBlock({prefix:prefix,index:1,label:'Your details'});
+  // relabel the card title for single-person categories
+  host.querySelector('.section-title').firstChild.textContent = 'Your Details ';
+  wireBlocks(host);
+}
+
+// ---------- Wire per-block interactions ----------
+function wireBlocks(scope){
+  // radio/checkbox selected highlight + progress
+  scope.querySelectorAll('.radio-option input, .checkbox-option input').forEach(input=>{
+    input.addEventListener('change', function(){
+      if(this.type==='radio'){
+        const g=this.closest('.radio-group');
+        if(g) g.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected'));
+      }
+      const parent=this.closest('.radio-option,.checkbox-option');
+      if(parent){
+        if(this.type==='checkbox') parent.classList.toggle('selected',this.checked);
+        else parent.classList.add('selected');
+      }
+      updateProgress();
+    });
+  });
+  // profession branching
+  scope.querySelectorAll('[data-radio$="-prof"]').forEach(group=>{
+    const name = group.getAttribute('data-radio');
+    group.querySelectorAll('input').forEach(r=>{
+      r.addEventListener('change', function(){
+        const base = name.replace('-prof','');
+        const otherEl = document.getElementById(base+'-prof-other');
+        const studentBlock = document.getElementById(base+'-student-block');
+        otherEl.classList.toggle('show', this.value==='Other');
+        if(this.value!=='Other') otherEl.value='';
+        studentBlock.classList.toggle('visible', this.value==='Student');
+        if(this.value!=='Student') document.getElementById(base+'-uni').value='';
+        updateProgress();
+      });
+    });
+  });
+  // phone: digits only
+  scope.querySelectorAll('input[type="tel"]').forEach(inp=>{
+    inp.addEventListener('input',function(){ this.value=this.value.replace(/\D/g,'').slice(0,11); updateProgress(); });
+  });
+  // nic: digits + dashes only
+  scope.querySelectorAll('input[id$="-nic"]').forEach(inp=>{
+    inp.addEventListener('input',function(){ this.value=this.value.replace(/[^\d-]/g,''); updateProgress(); });
+  });
+  scope.querySelectorAll('input[type="text"],input[type="number"],input[type="email"]').forEach(inp=>{
+    inp.addEventListener('input',updateProgress);
+  });
+}
+
+// ---------- Category chooser ----------
+document.querySelectorAll('.cat-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const cat = card.getAttribute('data-cat');
+    document.querySelectorAll('.cat-card').forEach(c=>c.classList.remove('active'));
+    card.classList.add('active');
+    document.querySelectorAll('.category-body').forEach(b=>b.classList.remove('active'));
+    document.getElementById('body-'+cat).classList.add('active');
+    document.getElementById('category').value = cat.charAt(0).toUpperCase()+cat.slice(1);
+    document.getElementById('submitBtn').style.display='block';
+    currentCat = cat;
+
+    if(cat==='padel' && !document.getElementById('padel-players').innerHTML) renderPadel();
+    if(cat==='volunteer' && !document.getElementById('volunteer-player').innerHTML) renderSingle('volunteer-player','volunteer');
+    if(cat==='spectator' && !document.getElementById('spectator-player').innerHTML) renderSingle('spectator-player','spectator');
+
+    // spectator has no profession per spec -> strip those groups
+    if(cat==='spectator'){ stripSpectatorExtras(); }
+
+    document.getElementById('success-msg').style.display='none';
+    updateProgress();
+    document.querySelector('.chooser-title').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Spectator only needs: Name, Age, Gender, Phone, NIC (no profession/student)
+function stripSpectatorExtras(){
+  const host = document.getElementById('spectator-player');
+  const profGroup = host.querySelector('[data-radio$="-prof"]');
+  if(profGroup){ profGroup.closest('.form-group').remove(); }
+}
+
+// Futsal size change
+document.getElementById('futsal-size').addEventListener('change',function(){
+  renderFutsal(parseInt(this.value)||0);
+  updateProgress();
+});
+
+// Kit radio highlight (outside player blocks)
+document.querySelectorAll('[data-radio="futsal-kit"] input, [data-radio="vol-sport"] input, #vol-roles input').forEach(input=>{
+  input.addEventListener('change',function(){
+    if(this.type==='radio'){
+      const g=this.closest('.radio-group');
+      if(g) g.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected'));
+    }
+    const parent=this.closest('.radio-option,.checkbox-option');
+    if(parent){
+      if(this.type==='checkbox') parent.classList.toggle('selected',this.checked);
+      else parent.classList.add('selected');
+    }
+    enforceVolLimit();
+    updateProgress();
+  });
+});
+
+// Volunteer: limit to exactly 2 roles
+function enforceVolLimit(){
+  const boxes = document.querySelectorAll('#vol-roles input[type="checkbox"]');
+  const checked = [...boxes].filter(b=>b.checked);
+  boxes.forEach(b=>{
+    const dis = (checked.length>=2 && !b.checked);
+    b.disabled = dis;
+    b.closest('.checkbox-option').classList.toggle('disabled',dis);
+  });
+}
+
+document.querySelectorAll('#reg-form input[type="text"],#reg-form input[type="number"]').forEach(i=>i.addEventListener('input',updateProgress));
+
+// ============================================================
+// VALIDATION HELPERS
+// ============================================================
+function showErr(el, show){
+  const grp = el.closest('.form-group') || el.closest('.consent-box') || el.parentElement;
+  const err = grp ? grp.querySelector('.field-error') : null;
+  if(err) err.classList.toggle('show', show);
+  return !show;
+}
+function reqText(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, el.value.trim()===''); }
+function reqEmail(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, !/\S+@\S+\.\S+/.test(el.value.trim())); }
+function reqAge(id){ const el=document.getElementById(id); if(!el) return true; const v=parseInt(el.value); return showErr(el, !(v>=1&&v<=100)); }
+function reqPhone(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, !/^\d{11}$/.test(el.value)); }
+function reqNic(id){ const el=document.getElementById(id); if(!el) return true; const digits=el.value.replace(/\D/g,''); return showErr(el, digits.length!==13); }
+function reqRadio(name){
+  const any=document.querySelector(`input[name="${name}"]`);
+  if(!any) return true;
+  const checked=document.querySelector(`input[name="${name}"]:checked`);
+  const grp=any.closest('.form-group')||any.closest('[data-radio]').parentElement;
+  const err=grp.querySelector('.field-error');
+  if(err) err.classList.toggle('show', !checked);
+  return !!checked;
+}
+function reqCheck(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, !el.checked); }
+
+function validatePlayer(idBase, opts){
+  let ok = true;
+  ok &= reqText(idBase+'-name');
+  if(opts.captainEmail) ok &= reqEmail(idBase+'-email');
+  ok &= reqAge(idBase+'-age');
+  ok &= reqRadio(idBase+'-gender');
+  ok &= reqPhone(idBase+'-phone');
+  ok &= reqNic(idBase+'-nic');
+  if(opts.profession!==false){
+    ok &= reqRadio(idBase+'-prof');
+    const prof=document.querySelector(`input[name="${idBase}-prof"]:checked`);
+    if(prof && prof.value==='Other') ok &= reqText(idBase+'-prof-other');
+    if(prof && prof.value==='Student') ok &= reqText(idBase+'-uni');
+  }
+  if(opts.showPaddle) ok &= reqRadio(idBase+'-paddle');
+  return !!ok;
+}
+
+function validateForm(){
+  let ok = true;
+  if(currentCat==='padel'){
+    ok &= reqText('padel-team');
+    ok &= validatePlayer('padel-p1',{captainEmail:true,showPaddle:true});
+    ok &= validatePlayer('padel-p2',{showPaddle:true});
+    ok &= reqCheck('padel-consent');
+  } else if(currentCat==='futsal'){
+    ok &= reqText('futsal-team');
+    ok &= reqRadio('futsal-kit');
+    ok &= reqText('futsal-size');
+    const size=parseInt(document.getElementById('futsal-size').value)||0;
+    for(let i=1;i<=size;i++) ok &= validatePlayer('futsal-p'+i,{captainEmail:i===1});
+    if(size) ok &= reqCheck('futsal-consent');
+  } else if(currentCat==='volunteer'){
+    ok &= validatePlayer('volunteer-p1',{});
+    ok &= reqRadio('vol-sport');
+    const roles=document.querySelectorAll('#vol-roles input:checked').length;
+    const rerr=document.querySelector('#vol-roles').closest('.form-group').querySelector('.field-error');
+    if(roles!==2){ rerr.classList.add('show'); ok=false; } else rerr.classList.remove('show');
+    ok &= reqCheck('volunteer-consent');
+  } else if(currentCat==='spectator'){
+    ok &= validatePlayer('spectator-p1',{profession:false});
+    ok &= reqCheck('spectator-consent');
+  }
+  if(!ok){
+    const firstErr=document.querySelector('.field-error.show');
+    if(firstErr) firstErr.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  return !!ok;
+}
+
+// ============================================================
+// PROGRESS
+// ============================================================
+function fieldFilled(el){
+  if(!el) return false;
+  if(el.type==='checkbox') return el.checked;
+  return el.value.trim()!=='';
+}
+function radioFilled(name){ return !!document.querySelector(`input[name="${name}"]:checked`); }
+
+function collectRequiredIds(){
+  // returns array of {kind, ref} for currentCat
+  const list=[];
+  const addPlayer=(base,opts)=>{
+    list.push(['text',base+'-name']);
+    if(opts.captainEmail) list.push(['text',base+'-email']);
+    list.push(['text',base+'-age']);
+    list.push(['radio',base+'-gender']);
+    list.push(['text',base+'-phone']);
+    list.push(['text',base+'-nic']);
+    if(opts.profession!==false){
+      list.push(['radio',base+'-prof']);
+      const prof=document.querySelector(`input[name="${base}-prof"]:checked`);
+      if(prof&&prof.value==='Other') list.push(['text',base+'-prof-other']);
+      if(prof&&prof.value==='Student') list.push(['text',base+'-uni']);
+    }
+    if(opts.showPaddle) list.push(['radio',base+'-paddle']);
+  };
+  if(currentCat==='padel'){
+    list.push(['text','padel-team']);
+    addPlayer('padel-p1',{captainEmail:true,showPaddle:true});
+    addPlayer('padel-p2',{showPaddle:true});
+    list.push(['check','padel-consent']);
+  } else if(currentCat==='futsal'){
+    list.push(['text','futsal-team']); list.push(['radio','futsal-kit']); list.push(['text','futsal-size']);
+    const size=parseInt(document.getElementById('futsal-size').value)||0;
+    for(let i=1;i<=size;i++) addPlayer('futsal-p'+i,{captainEmail:i===1});
+    if(size) list.push(['check','futsal-consent']);
+  } else if(currentCat==='volunteer'){
+    addPlayer('volunteer-p1',{});
+    list.push(['radio','vol-sport']); list.push(['volroles','vol-roles']); list.push(['check','volunteer-consent']);
+  } else if(currentCat==='spectator'){
+    addPlayer('spectator-p1',{profession:false});
+    list.push(['check','spectator-consent']);
+  }
+  return list;
+}
+
+function updateProgress(){
+  if(!currentCat){ setBar(0); return; }
+  const list=collectRequiredIds();
+  if(!list.length){ setBar(0); return; }
+  let done=0;
+  list.forEach(([kind,ref])=>{
+    if(kind==='radio'){ if(radioFilled(ref)) done++; }
+    else if(kind==='volroles'){ if(document.querySelectorAll('#vol-roles input:checked').length===2) done++; }
+    else { if(fieldFilled(document.getElementById(ref))) done++; }
+  });
+  setBar(Math.round(done/list.length*100));
+}
+function setBar(p){
+  document.getElementById('progress-fill').style.width=p+'%';
+  document.getElementById('progress-label').textContent=p+'%';
+}
+
+// ============================================================
+// SUBMIT
+// ============================================================
+function playerData(base,opts){
+  const d={
+    name:val(base+'-name'), age:val(base+'-age'),
+    gender:radioVal(base+'-gender'), phone:val(base+'-phone'),
+    nic:val(base+'-nic').replace(/\D/g,'')
+  };
+  if(opts.captainEmail) d.email=val(base+'-email');
+  if(opts.categoryValue) d.playerCategory=val(base+'-catfield')||opts.categoryValue;
+  if(opts.profession!==false){
+    d.profession=radioVal(base+'-prof');
+    if(d.profession==='Other') d.professionOther=val(base+'-prof-other');
+    if(d.profession==='Student') d.institution=val(base+'-uni');
+  }
+  if(opts.showPaddle) d.ownPaddle=radioVal(base+'-paddle');
+  return d;
+}
+
+document.getElementById('reg-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  if(!currentCat){ return; }
+  if(!validateForm()) return;
+
+  const data = { category: document.getElementById('category').value, submittedAt:new Date().toISOString() };
+
+  if(currentCat==='padel'){
+    data.teamName=val('padel-team');
+    data.players=[
+      playerData('padel-p1',{captainEmail:true,showPaddle:true,role:'Team Captain'}),
+      playerData('padel-p2',{showPaddle:true})
+    ];
+    data.players[0].role='Team Captain';
+  } else if(currentCat==='futsal'){
+    data.teamName=val('futsal-team');
+    data.hasKit=radioVal('futsal-kit');
+    const size=parseInt(document.getElementById('futsal-size').value)||0;
+    data.teamSize=size;
+    data.players=[];
+    for(let i=1;i<=size;i++){
+      const pd=playerData('futsal-p'+i,{captainEmail:i===1, categoryValue:i>5?'Substitute':'Lineup'});
+      if(i===1) pd.role='Team Captain';
+      data.players.push(pd);
+    }
+  } else if(currentCat==='volunteer'){
+    data.volunteer=playerData('volunteer-p1',{});
+    data.sportPreference=radioVal('vol-sport');
+    data.rolePreferences=[...document.querySelectorAll('#vol-roles input:checked')].map(c=>c.value);
+  } else if(currentCat==='spectator'){
+    data.spectator=playerData('spectator-p1',{profession:false});
+  }
+
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true; btn.textContent='Submitting…';
+  document.getElementById('error-msg').style.display='none';
+
+  if(GOOGLE_SCRIPT_URL==='PASTE_YOUR_URL_HERE'){
+    console.log('Registration (add Apps Script URL to send):', data);
+    return showSuccess();
+  }
+  try{
+    await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     showSuccess();
-  } catch (err) {
-    showError();
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Submit Survey →';
+  }catch(err){
+    document.getElementById('error-msg').style.display='block';
+    btn.disabled=false; btn.textContent='Submit Registration →';
   }
 });
 
-function val(id) {
-  const el = document.getElementById(id);
-  return el ? el.value.trim() : '';
-}
-function radio(name) {
-  const r = document.querySelector(`input[name="${name}"]:checked`);
-  return r ? r.value : '';
-}
-function checkboxValues(name) {
-  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(c => c.value).join(', ');
+function val(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
+function radioVal(name){ const r=document.querySelector(`input[name="${name}"]:checked`); return r?r.value:''; }
+
+function showSuccess(){
+  document.getElementById('reg-form').style.display='none';
+  document.getElementById('success-msg').style.display='block';
+  setBar(100);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function showSuccess() {
-  document.getElementById('survey-form').style.display = 'none';
-  document.getElementById('success-msg').style.display = 'block';
-  document.getElementById('progress-fill').style.width = '100%';
-  document.getElementById('progress-label').textContent = '100%';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-function showError() {
-  document.getElementById('error-msg').style.display = 'block';
-}
-
-// ─────────────────────────────────────────────
-// VALIDATION
-// ─────────────────────────────────────────────
-function validateForm() {
-  let valid = true;
-  const status = getActiveStatus();
-
-  function checkText(id, errId, condition) {
-    const el = document.getElementById(id);
-    const err = document.getElementById(errId);
-    if (!err) return;
-    if (condition === undefined ? (el && el.value.trim() === '') : condition) {
-      err.style.display = 'block';
-      el && el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      valid = false;
-    } else {
-      err.style.display = 'none';
-    }
-  }
-
-  function checkRadio(name, errId) {
-    const err = document.getElementById(errId);
-    if (!err) return;
-    if (!document.querySelector(`input[name="${name}"]:checked`)) {
-      err.style.display = 'block';
-      const group = document.querySelector(`input[name="${name}"]`);
-      group && group.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      valid = false;
-    } else {
-      err.style.display = 'none';
-    }
-  }
-
-  // Core
-  checkText('fullName', 'err-fullName');
-  const ageEl = document.getElementById('age');
-  const ageErr = document.getElementById('err-age');
-  if (!ageEl.value || ageEl.value < 13 || ageEl.value > 100) {
-    ageErr.style.display = 'block'; valid = false;
-  } else { ageErr.style.display = 'none'; }
-
-  const emailEl = document.getElementById('email');
-  const emailErr = document.getElementById('err-email');
-  if (!emailEl.value || !/\S+@\S+\.\S+/.test(emailEl.value)) {
-    emailErr.style.display = 'block'; valid = false;
-  } else { emailErr.style.display = 'none'; }
-
-  checkText('country', 'err-country');
-  checkRadio('status', 'err-status');
-
-  if (status === 'High School Student') {
-    checkRadio('grade', 'err-grade');
-    checkText('schoolName', 'err-schoolName');
-    checkRadio('receivedCounselling', 'err-receivedCounselling');
-    if (isChecked('receivedCounselling', 'Yes')) {
-      checkRadio('counsellingEffectiveness', 'err-counsellingEffectiveness');
-      checkRadio('genericAdvice', 'err-genericAdvice');
-    }
-    checkRadio('dreamUniversity', 'err-dreamUniversity');
-    if (isChecked('dreamUniversity', 'Yes')) {
-      checkRadio('mentorHelp', 'err-mentorHelp');
-    }
-    checkRadio('preferMentor', 'err-preferMentor');
-  }
-
-  if (status === 'University Student') {
-    checkRadio('uniYear', 'err-uniYear');
-    checkText('uniName', 'err-uniName');
-    checkText('major', 'err-major');
-    checkText('appliedFromCountry', 'err-appliedFromCountry');
-    checkRadio('schoolingSystem', 'err-schoolingSystem');
-    checkRadio('b6counselling', 'err-b6counselling');
-    if (isChecked('b6counselling', 'Yes')) {
-      checkRadio('b7generic', 'err-b7generic');
-    }
-    checkRadio('b8mentorChances', 'err-b8mentorChances');
-    checkRadio('b9mentor', 'err-b9mentor');
-    if (isChecked('b9mentor', 'Yes')) {
-      checkRadio('b10rate', 'err-b10rate');
-    }
-    checkRadio('b11willingness', 'err-b11willingness');
-    checkRadio('b12benefit', 'err-b12benefit');
-  }
-
-  checkRadio('betaInterest', 'err-betaInterest');
-
-  return valid;
-}
-
-// Initial progress calc
-updateProgress();
+setBar(0);
 </script>
 </body>
 </html>
