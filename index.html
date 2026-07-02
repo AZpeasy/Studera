@@ -3,861 +3,263 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Studera Grand Slam — Registration</title>
+<title>Studera Grand Slam 1.0 — Registrations Opening Soon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --green:#147A3E; --green-dark:#0e5a2d; --green-light:#e8f5ee;
-  --orange:#F97316; --orange-dark:#c44f0a; --orange-bg:#fff7ed;
-  --gray-light:#F7F7F5; --gray-mid:#e0e0e0; --gray-text:#555;
-  --dark:#1a1a1a; --radius:12px; --shadow:0 2px 18px rgba(20,122,62,.10);
+  --green:#147A3E; --green-dark:#0e5a2d; --green-light:#1c9a4f;
+  --orange:#F97316; --orange-dark:#c44f0a;
+  --ink:#0a1f14; --paper:#f0f7f3;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html,body{height:100%;width:100%;}
 body{
-  font-family:'DM Sans',sans-serif; background:#f0f7f3;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23147A3E' stroke-opacity='.07' stroke-width='1.2'%3E%3Ccircle cx='30' cy='30' r='22'/%3E%3Cline x1='30' y1='8' x2='30' y2='52'/%3E%3Cline x1='8' y1='30' x2='52' y2='30'/%3E%3C/g%3E%3C/svg%3E");
-  color:var(--dark); min-height:100vh; padding-bottom:60px;
+  font-family:'DM Sans',sans-serif;
+  color:#fff;
+  height:100vh;
+  height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:10px 20px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #1c9a4f 0%, transparent 60%),
+    radial-gradient(900px 500px at 90% 110%, rgba(249,115,22,.35) 0%, transparent 55%),
+    linear-gradient(160deg, #0e5a2d 0%, #0a3d20 55%, #072415 100%);
 }
 
-/* PROGRESS BAR */
-#progress-bar-wrapper{position:sticky;top:0;left:0;width:100%;z-index:1000;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:8px 20px;display:flex;align-items:center;gap:12px;}
-#progress-track{flex:1;height:8px;background:#ffe8d4;border-radius:99px;overflow:hidden;}
-#progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--orange),#fb923c);border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1);}
-#progress-label{font-size:12px;font-weight:700;color:var(--orange);white-space:nowrap;min-width:38px;text-align:right;}
-
-/* HEADER */
-header{background:#fff;border-bottom:3px solid var(--green);padding:34px 24px 26px;text-align:center;}
-.logo-img{max-height:82px;width:auto;margin:0 auto 6px;display:block;}
-.logo-fallback{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,6vw,3.4rem);color:var(--green);letter-spacing:-1px;line-height:1;}
-.logo-tagline{font-size:clamp(.82rem,2vw,1rem);color:#333;margin-top:6px;letter-spacing:.5px;}
-
-/* HERO / WELCOME */
-.hero{max-width:820px;margin:30px auto 0;padding:0 20px;}
-.welcome-card{background:#fff;border:1px solid var(--gray-mid);border-radius:16px;box-shadow:var(--shadow);padding:30px 32px;line-height:1.7;}
-.welcome-card h1{font-family:'DM Serif Display',serif;color:var(--green);font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:14px;line-height:1.15;}
-.welcome-card h1 .accent{color:var(--orange);}
-.welcome-card p{margin-bottom:12px;color:#333;font-size:.97rem;}
-.welcome-card p:last-child{margin-bottom:0;}
-
-.prize-banner{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-radius:16px;padding:26px 28px;margin:22px auto 0;max-width:820px;text-align:center;box-shadow:var(--shadow);}
-.prize-banner .label{text-transform:uppercase;letter-spacing:2px;font-size:.78rem;font-weight:700;color:#c8f0d8;}
-.prize-banner .amount{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,8vw,3.8rem);line-height:1;margin:6px 0 4px;}
-.prize-banner .amount .cur{color:var(--orange);font-size:.5em;vertical-align:super;}
-
-.event-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;max-width:820px;margin:16px auto 0;padding:0 20px;}
-.fact{background:#fff;border:1px solid var(--gray-mid);border-left:4px solid var(--orange);border-radius:12px;padding:16px 18px;}
-.fact .k{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700;margin-bottom:4px;}
-.fact .v{font-size:.95rem;font-weight:500;color:#222;line-height:1.4;}
-
-.stalls-note{max-width:820px;margin:16px auto 0;padding:14px 18px;background:var(--orange-bg);border:1px solid #fed7aa;border-radius:12px;font-size:.9rem;color:#92400e;text-align:center;}
-
-/* FORM WRAP */
-.form-wrapper{max-width:820px;margin:30px auto 0;padding:0 20px;}
-
-/* CATEGORY CHOOSER */
-.chooser-title{font-family:'DM Serif Display',serif;color:var(--green);font-size:1.3rem;text-align:center;margin-bottom:6px;}
-.chooser-sub{text-align:center;color:var(--gray-text);font-size:.9rem;margin-bottom:20px;}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:10px;}
-.cat-card{border:2px solid var(--gray-mid);border-radius:16px;padding:22px 16px;text-align:center;cursor:pointer;background:#fff;transition:border-color .18s,transform .12s,box-shadow .18s;}
-.cat-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:var(--shadow);}
-.cat-card.active{border-color:var(--green);background:var(--green-light);box-shadow:var(--shadow);}
-.cat-card .emoji{font-size:2.2rem;display:block;margin-bottom:8px;}
-.cat-card .name{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--green);}
-.cat-card .fee{font-size:.8rem;color:var(--gray-text);margin-top:4px;}
-
-/* SECTIONS */
-.category-body{display:none;margin-top:26px;}
-.category-body.active{display:block;animation:fadeSlide .35s ease;}
-@keyframes fadeSlide{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-.poster-wrap{text-align:center;margin-bottom:18px;}
-.poster-wrap img{max-width:100%;border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--gray-mid);}
-
-.info-box{background:var(--green-light);border-left:5px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:22px 24px;margin-bottom:22px;line-height:1.7;font-size:.94rem;color:#1f3d2b;}
-.info-box h3{font-family:'DM Serif Display',serif;color:var(--green);font-size:1.2rem;margin-bottom:12px;}
-.info-box .row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
-.info-box .row b{color:var(--green-dark);}
-.info-box .schedule{background:#fff;border-radius:10px;padding:12px 16px;margin:12px 0;}
-.info-box .schedule .day{font-weight:700;color:var(--orange-dark);}
-.info-box .warn{background:var(--orange-bg);border:1px solid #fed7aa;border-radius:10px;padding:12px 14px;margin-top:12px;color:#92400e;font-size:.9rem;}
-.info-box .nic-note{margin-top:10px;font-weight:600;color:var(--green-dark);}
-
-/* CARD */
-.section-card{background:#fff;border:1px solid var(--gray-mid);border-radius:14px;padding:26px 26px 20px;margin-bottom:20px;box-shadow:var(--shadow);}
-.section-title{font-family:'DM Serif Display',serif;font-size:1.18rem;color:var(--green);border-bottom:2px solid var(--green-light);padding-bottom:10px;margin-bottom:20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.captain-badge{background:var(--orange);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;font-family:'DM Sans',sans-serif;letter-spacing:.5px;}
-.sub-badge{background:#94a3b8;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;font-family:'DM Sans',sans-serif;letter-spacing:.5px;}
-.lineup-badge{background:var(--green);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;font-family:'DM Sans',sans-serif;letter-spacing:.5px;}
-
-/* FIELDS */
-.form-group{margin-bottom:18px;}
-label.field-label{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px;color:#1a1a1a;line-height:1.4;}
-label.field-label .req{color:#e53e3e;margin-left:3px;}
-label.field-label .hint{color:#888;font-weight:400;font-size:.82rem;margin-left:4px;}
-input[type=text],input[type=number],input[type=email],input[type=tel],select{
-  width:100%;padding:11px 14px;border:1.5px solid var(--gray-mid);border-radius:var(--radius);
-  font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--dark);background:var(--gray-light);
-  transition:border-color .2s,box-shadow .2s;outline:none;
+/* faint sport court lines in the background */
+.court{
+  position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.14;
 }
-select{cursor:pointer;}
-input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(20,122,62,.12);background:#fff;}
-input.locked{background:#eef2f0;color:#555;cursor:not-allowed;}
+.court svg{width:100%;height:100%;}
 
-/* RADIO / CHECK */
-.radio-group,.checkbox-group{display:flex;flex-direction:column;gap:10px;}
-.radio-row{flex-direction:row;flex-wrap:wrap;}
-.radio-option,.checkbox-option{display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:10px 14px;border:1.5px solid var(--gray-mid);border-radius:var(--radius);background:var(--gray-light);transition:border-color .15s,background .15s;font-size:.92rem;line-height:1.4;flex:1;min-width:120px;}
-.radio-option:hover,.checkbox-option:hover{border-color:var(--green);background:var(--green-light);}
-.radio-option input,.checkbox-option input{width:17px;height:17px;min-width:17px;accent-color:var(--green);margin-top:2px;cursor:pointer;}
-.radio-option.selected,.checkbox-option.selected{border-color:var(--green);background:var(--green-light);}
-.radio-option.disabled,.checkbox-option.disabled{opacity:.5;cursor:not-allowed;}
+/* soft floating orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;z-index:0;animation:float 9s ease-in-out infinite;}
+.orb.a{width:120px;height:120px;background:radial-gradient(circle at 30% 30%,#ffd7b0,#F97316);top:12%;left:8%;animation-delay:0s;}
+.orb.b{width:80px;height:80px;background:radial-gradient(circle at 30% 30%,#eafff2,#2bd473);bottom:16%;right:10%;animation-delay:1.5s;}
+.orb.c{width:46px;height:46px;background:radial-gradient(circle at 30% 30%,#ffe9d3,#fb923c);top:22%;right:18%;animation-delay:3s;}
+@keyframes float{0%,100%{transform:translateY(0) translateX(0);}50%{transform:translateY(-22px) translateX(10px);}}
 
-.other-input{margin-top:8px;width:100%;padding:8px 12px;border:1.5px solid var(--gray-mid);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;background:#fff;outline:none;display:none;}
-.other-input.show{display:block;}
-.other-input:focus{border-color:var(--green);}
+.wrap{position:relative;z-index:2;max-width:820px;width:100%;animation:rise .8s cubic-bezier(.2,.7,.2,1) both;}
+@keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-.conditional-block{display:none;}
-.conditional-block.visible{display:block;animation:fadeSlide .3s ease;}
+.logo-plate{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  background:#fff;
+  padding:10px 18px;
+  border-radius:16px;
+  margin:0 auto 12px;
+  box-shadow:0 6px 20px rgba(0,0,0,.3);
+  line-height:0;
+}
+.logo-img{max-height:clamp(52px,8vh,80px);width:auto;display:block;}
+.logo-fallback{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,7vw,3.6rem);color:var(--green);line-height:1;letter-spacing:-1px;display:none;}
 
-/* CONSENT */
-.consent-box{background:var(--orange-bg);border:1px solid #fed7aa;border-radius:var(--radius);padding:16px 18px;margin-top:6px;}
-.consent-box label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:.9rem;line-height:1.55;color:#5c3a12;}
-.consent-box input{width:18px;height:18px;min-width:18px;accent-color:var(--green);margin-top:2px;}
+.eyebrow{
+  display:inline-block;margin:4px 0 12px;
+  font-size:.8rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  color:#fff;
+  background:var(--orange);
+  border:none;
+  padding:8px 18px;border-radius:99px;
+  box-shadow:0 4px 14px rgba(249,115,22,.4);
+}
 
-/* SUBMIT */
-.submit-btn{display:block;width:100%;padding:16px;background:var(--green);color:#fff;font-family:'DM Serif Display',serif;font-size:1.18rem;letter-spacing:.3px;border:none;border-radius:var(--radius);cursor:pointer;margin-top:26px;transition:background .2s,transform .1s;}
-.submit-btn:hover{background:var(--green-dark);}
-.submit-btn:active{transform:scale(.99);}
-.submit-btn:disabled{background:#aaa;cursor:not-allowed;}
+h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.9rem,5vw,3.3rem);
+  line-height:1.08;
+  margin-bottom:10px;
+  text-shadow:0 4px 24px rgba(0,0,0,.35);
+}
+h1 .slam{color:#ffb877;}
 
-/* MESSAGES */
-.field-error{color:#e53e3e;font-size:.82rem;margin-top:5px;display:none;}
-.field-error.show{display:block;}
-#success-msg,#error-msg{display:none;padding:24px 26px;border-radius:var(--radius);text-align:center;font-size:1.02rem;margin-top:20px;line-height:1.6;}
-#success-msg{background:var(--green-light);border:2px solid var(--green);color:var(--green-dark);}
-#success-msg h2{font-family:'DM Serif Display',serif;font-size:1.6rem;margin-bottom:10px;}
-#success-msg .mail{color:var(--orange-dark);font-weight:700;}
-#error-msg{background:#fff5f5;border:2px solid #fc8181;color:#c53030;}
+.lede{
+  font-size:clamp(.95rem,2vw,1.15rem);
+  color:#dff3e8;
+  max-width:620px;margin:0 auto 6px;
+  line-height:1.5;font-weight:400;
+}
+.opens{
+  font-size:clamp(1rem,2.2vw,1.28rem);
+  font-weight:700;color:#fff;margin:10px auto 0;
+}
+.opens .date{color:#ffb877;}
 
-footer{text-align:center;padding:28px 20px;font-size:.82rem;color:#555;margin-top:40px;}
+/* COUNTDOWN */
+.countdown{
+  display:flex;justify-content:center;gap:clamp(10px,3vw,22px);
+  margin:clamp(18px,3vh,30px) auto 8px;flex-wrap:wrap;
+}
+.unit{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:18px;
+  padding:clamp(12px,2.2vh,20px) clamp(14px,3.5vw,30px);
+  min-width:clamp(74px,20vw,116px);
+  backdrop-filter:blur(8px);
+  box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.12);
+  position:relative;overflow:hidden;
+}
+.unit::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),#fb923c);}
+.unit .num{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,6vw,3.1rem);
+  line-height:1;color:#fff;font-variant-numeric:tabular-nums;
+  display:block;
+}
+.unit .lab{
+  margin-top:6px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:#bfe6cf;font-weight:600;
+}
 
-@media(max-width:540px){
-  .section-card{padding:20px 16px 16px;}
-  .welcome-card{padding:22px 20px;}
-  .radio-option,.checkbox-option{min-width:100%;}
+.audience{
+  margin-top:clamp(14px,2.5vh,24px);display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+}
+.chip{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  padding:8px 16px;border-radius:99px;
+  font-size:.88rem;font-weight:600;color:#eafff2;
+  display:flex;align-items:center;gap:7px;
+}
+
+.footer-note{
+  margin-top:clamp(16px,2.5vh,26px);color:#a9d8bd;font-size:.84rem;line-height:1.55;
+}
+.footer-note .live{color:#ffb877;font-weight:700;}
+
+.open-state{display:none;}
+.open-state .cta{
+  display:inline-block;margin-top:20px;
+  background:var(--orange);color:#fff;text-decoration:none;
+  font-family:'DM Serif Display',serif;font-size:1.2rem;
+  padding:15px 34px;border-radius:14px;
+  box-shadow:0 10px 26px rgba(249,115,22,.4);
+  transition:transform .12s,background .2s;
+}
+.open-state .cta:hover{background:var(--orange-dark);transform:translateY(-2px);}
+
+@media (max-width:420px){
+  .unit{min-width:64px;padding:12px 10px;}
+  .countdown{gap:8px;}
 }
 </style>
 </head>
 <body>
 
-<!-- PROGRESS -->
-<div id="progress-bar-wrapper">
-  <span style="font-size:12px;font-weight:600;color:#555;white-space:nowrap;">Progress</span>
-  <div id="progress-track"><div id="progress-fill"></div></div>
-  <span id="progress-label">0%</span>
+<div class="court" aria-hidden="true">
+  <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#ffffff" stroke-width="2">
+    <rect x="80" y="70" width="640" height="460" rx="6"/>
+    <line x1="400" y1="70" x2="400" y2="530"/>
+    <circle cx="400" cy="300" r="70"/>
+    <rect x="80" y="200" width="90" height="200"/>
+    <rect x="630" y="200" width="90" height="200"/>
+    <line x1="80" y1="300" x2="20" y2="300"/>
+    <line x1="720" y1="300" x2="780" y2="300"/>
+  </svg>
 </div>
 
-<!-- HEADER -->
-<header>
-  <img src="logo.png" alt="Studera" class="logo-img"
-       onerror="this.style.display='none';document.getElementById('logo-fb').style.display='block';">
-  <div id="logo-fb" class="logo-fallback" style="display:none;">Studera</div>
-  <div class="logo-tagline">Making Students Powerful Everyday</div>
-</header>
+<div class="orb a" aria-hidden="true"></div>
+<div class="orb b" aria-hidden="true"></div>
+<div class="orb c" aria-hidden="true"></div>
 
-<!-- WELCOME -->
-<div class="hero">
-  <div class="welcome-card">
-    <h1>Welcome to the <span class="accent">Studera Grand Slam</span></h1>
-    <p>Studera is an EdTech startup on a mission to make students powerful everyday — connecting them with mentors who have already walked the path they want to take.</p>
-    <p>The <b>Grand Slam</b> is our flagship fundraising sports festival: two days of Padel and Futsal, run by students, for the community. Every registration and ticket directly fuels Studera's work. Whether you're competing, volunteering, or cheering from the stands, you're part of it.</p>
-  </div>
-</div>
-
-<!-- PRIZE -->
-<div class="prize-banner">
-  <div class="label">Total Prize Pool</div>
-  <div class="amount"><span class="cur">PKR</span> 110,000</div>
-</div>
-
-<!-- FACTS -->
-<div class="event-facts">
-  <div class="fact"><div class="k">Competition Days</div><div class="v">25th &amp; 26th July 2025</div></div>
-  <div class="fact"><div class="k">Location</div><div class="v">The International School, Pakistan Railways Campus, DHA Phase 2 — opposite Foundation Public School, Defense Campus</div></div>
-</div>
-<div class="stalls-note">☕ Coffee, refreshment &amp; hydration stalls will be available to purchase for all athletes, volunteers and spectators throughout the event.</div>
-
-<!-- FORM -->
-<div class="form-wrapper">
-  <div class="chooser-title">Register to take part</div>
-  <div class="chooser-sub">Choose the category you're registering for — the form updates to match.</div>
-
-  <div class="cat-grid">
-    <div class="cat-card" data-cat="padel">
-      <span class="emoji">🎾</span><div class="name">Padel</div><div class="fee">10,000 PKR / team</div>
-    </div>
-    <div class="cat-card" data-cat="futsal">
-      <span class="emoji">⚽</span><div class="name">Futsal</div><div class="fee">12,000 PKR / team</div>
-    </div>
-    <div class="cat-card" data-cat="volunteer">
-      <span class="emoji">🙌</span><div class="name">Volunteer</div><div class="fee">Free to join</div>
-    </div>
-    <div class="cat-card" data-cat="spectator">
-      <span class="emoji">🎟️</span><div class="name">Spectator</div><div class="fee">100 PKR / both days</div>
-    </div>
+<div class="wrap">
+  <div class="logo-plate">
+    <img src="logo.png" alt="Studera" class="logo-img"
+         onerror="this.style.display='none';document.getElementById('logo-fb').style.display='block';">
+    <div id="logo-fb" class="logo-fallback">Studera</div>
   </div>
 
-  <form id="reg-form" novalidate>
-    <input type="hidden" id="category" name="category" value="">
+  <span class="eyebrow">Studera Grand Slam 1.0</span>
 
-    <!-- ============ PADEL ============ -->
-    <div class="category-body" id="body-padel">
-      <div class="poster-wrap">
-        <img src="padel.png" alt="Padel poster" onerror="this.style.display='none'">
-      </div>
-      <div class="info-box">
-        <h3>Padel — Important Information</h3>
-        <div class="row"><b>Registration Fee:</b>&nbsp;10,000 PKR per team</div>
-        <div class="row"><b>Tournament Category:</b>&nbsp;C (Low–mid intermediate)</div>
-        <div class="schedule">
-          <div><span class="day">25th July</span> — Group Stage Games · 6 pm – 11 pm</div>
-          <div style="margin-top:6px;"><span class="day">26th July</span> — Quarterfinals, Semifinals &amp; Finals · 7 pm – 11 pm</div>
-        </div>
-        <p>Your game slots will be shared in advance. Teams should arrive 15–30 minutes before their game for a smooth pre-game registration. If a team does not clear pre-game registration at least 5 minutes before the game, it results in a walkover win for the opposing team.</p>
-        <div class="nic-note">Important: Please carry your NIC, or a digital picture of it, for verification during pre-game registration.</div>
-      </div>
+  <!-- COUNTDOWN STATE -->
+  <div id="countdown-state">
+    <h1>Registrations are<br>almost <span class="slam">here.</span></h1>
+    <p class="lede">Two days of Padel &amp; Futsal, run by students, for the community — and a fundraiser powering Studera's mission.</p>
+    <p class="opens">Registrations open on <span class="date" id="open-date-label">the 10th of July</span> for all Teams, Athletes &amp; Volunteers.</p>
 
-      <div class="section-card">
-        <div class="section-title">Team</div>
-        <div class="form-group">
-          <label class="field-label" for="padel-team">Team Name <span class="req">*</span></label>
-          <input type="text" id="padel-team" data-req placeholder="Your team name">
-          <div class="field-error">Please enter a team name.</div>
-        </div>
-      </div>
-
-      <div id="padel-players"></div>
-
-      <div class="section-card">
-        <div class="consent-box">
-          <label>
-            <input type="checkbox" id="padel-consent" data-req>
-            <span>I confirm the details above are accurate. I understand that Studera may verify eligibility, and reserves the right to cancel a registration, disqualify a team, or amend the tournament schedule at its discretion. I agree that the information provided may be used by Studera solely to organise this event and to stay in touch about it.</span>
-          </label>
-          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
-        </div>
-      </div>
+    <div class="countdown" id="countdown" role="timer" aria-live="polite">
+      <div class="unit"><span class="num" id="d">--</span><span class="lab">Days</span></div>
+      <div class="unit"><span class="num" id="h">--</span><span class="lab">Hours</span></div>
+      <div class="unit"><span class="num" id="m">--</span><span class="lab">Minutes</span></div>
+      <div class="unit"><span class="num" id="s">--</span><span class="lab">Seconds</span></div>
     </div>
 
-    <!-- ============ FUTSAL ============ -->
-    <div class="category-body" id="body-futsal">
-      <div class="poster-wrap">
-        <img src="futsal.png" alt="Futsal poster" onerror="this.style.display='none'">
-      </div>
-      <div class="info-box">
-        <h3>Futsal — Important Information</h3>
-        <div class="row"><b>Registration Fee:</b>&nbsp;12,000 PKR per team</div>
-        <div class="row"><b>Tournament Category:</b>&nbsp;U-20</div>
-        <div class="row"><b>Match Format:</b>&nbsp;5v5</div>
-        <div class="schedule">
-          <div><span class="day">25th July</span> — Group Stage Games · 6 pm – 10 pm</div>
-          <div style="margin-top:6px;"><span class="day">26th July</span> — Quarterfinals, Semifinals &amp; Finals · 8 pm – 11 pm</div>
-        </div>
-        <p>Your game slots will be shared in advance. Teams should arrive 15–30 minutes before their game for a smooth pre-game registration. If a team does not clear pre-game registration at least 5 minutes before the game, it results in a walkover win for the opposing team.</p>
-        <div class="nic-note">Important: Please carry your NIC, or a digital picture of it, for verification during pre-game registration.</div>
-      </div>
-
-      <div class="section-card">
-        <div class="section-title">Team</div>
-        <div class="form-group">
-          <label class="field-label" for="futsal-team">Team Name <span class="req">*</span></label>
-          <input type="text" id="futsal-team" data-req placeholder="Your team name">
-          <div class="field-error">Please enter a team name.</div>
-        </div>
-        <div class="form-group">
-          <label class="field-label">Does your team have a game kit to wear on tournament day? <span class="req">*</span></label>
-          <div class="radio-group radio-row" data-radio="futsal-kit">
-            <label class="radio-option"><input type="radio" name="futsal-kit" value="Yes"><span>Yes</span></label>
-            <label class="radio-option"><input type="radio" name="futsal-kit" value="No"><span>No</span></label>
-          </div>
-          <div class="field-error">Please choose one.</div>
-          <div style="font-size:.85rem;color:var(--gray-text);margin-top:8px;">If you select <b>No</b>, we'll arrange bibs so all players on the field wear uniform attire.</div>
-        </div>
-        <div class="form-group">
-          <label class="field-label" for="futsal-size">Number of people in your team <span class="hint">(min 5, max 8)</span> <span class="req">*</span></label>
-          <select id="futsal-size" data-req>
-            <option value="">Select team size…</option>
-            <option value="5">5 players</option>
-            <option value="6">6 players</option>
-            <option value="7">7 players</option>
-            <option value="8">8 players</option>
-          </select>
-          <div class="field-error">Please select your team size.</div>
-        </div>
-      </div>
-
-      <div id="futsal-players"></div>
-
-      <div class="section-card" id="futsal-consent-card" style="display:none;">
-        <div class="consent-box">
-          <label>
-            <input type="checkbox" id="futsal-consent" data-req>
-            <span>I confirm the details above are accurate. I understand that Studera may verify eligibility, and reserves the right to cancel a registration, disqualify a team, or amend the tournament schedule at its discretion. I agree that the information provided may be used by Studera solely to organise this event and to stay in touch about it.</span>
-          </label>
-          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
-        </div>
-      </div>
+    <div class="audience">
+      <span class="chip">🎾 Padel Teams</span>
+      <span class="chip">⚽ Futsal Teams</span>
+      <span class="chip">🙌 Volunteers</span>
+      <span class="chip">🎟️ Spectators</span>
     </div>
 
-    <!-- ============ VOLUNTEER ============ -->
-    <div class="category-body" id="body-volunteer">
-      <div class="info-box">
-        <h3>Volunteer — Important Information</h3>
-        <div class="schedule">
-          <div><span class="day">25th July</span> — Group Stage Games · 6 pm – 10 pm</div>
-          <div style="margin-top:6px;"><span class="day">26th July</span> — Quarterfinals, Semifinals &amp; Finals · 8 pm – 11 pm</div>
-        </div>
-        <p>Volunteers are expected to arrive one hour before the event starts each day. Please note: transportation will <b>not</b> be provided.</p>
-      </div>
+    <p class="footer-note">
+      Prize Pool <span class="live">110,000 PKR</span> · 25–26 July · The International School, DHA Phase 2<br>
+      Check back on the 10th of July to secure your spot.
+    </p>
+  </div>
 
-      <div id="volunteer-player"></div>
-
-      <div class="section-card">
-        <div class="section-title">Volunteering Preferences</div>
-        <div class="form-group">
-          <label class="field-label">Which sport would you prefer to volunteer for? <span class="req">*</span></label>
-          <div class="radio-group radio-row" data-radio="vol-sport">
-            <label class="radio-option"><input type="radio" name="vol-sport" value="Padel"><span>Padel</span></label>
-            <label class="radio-option"><input type="radio" name="vol-sport" value="Futsal"><span>Futsal</span></label>
-          </div>
-          <div class="field-error">Please choose a preference.</div>
-        </div>
-        <div class="form-group">
-          <label class="field-label">What would you like to help with? <span class="hint">(choose any 2)</span> <span class="req">*</span></label>
-          <div class="checkbox-group" id="vol-roles">
-            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Pre-Game Registration"><span>Pre-Game Registration</span></label>
-            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Refreshment / Hydration Stall"><span>Refreshment / Hydration Stall</span></label>
-            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Scoring"><span>Scoring</span></label>
-            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Security"><span>Security</span></label>
-            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Management Facilitation"><span>Management Facilitation</span></label>
-            <label class="checkbox-option"><input type="checkbox" name="vol-role" value="Marketing"><span>Marketing</span></label>
-          </div>
-          <div class="field-error">Please pick exactly two.</div>
-          <div style="font-size:.85rem;color:var(--gray-text);margin-top:8px;">These are preferences only — Studera will place volunteers according to the needs of the event.</div>
-        </div>
-        <div class="consent-box" style="margin-top:16px;">
-          <label>
-            <input type="checkbox" id="volunteer-consent" data-req>
-            <span>I'd like to volunteer at the Studera Grand Slam. I understand Studera may verify my details and reserves the right to adjust volunteer roles at its discretion. My information will be used solely to coordinate my participation and stay in touch about the event.</span>
-          </label>
-          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ SPECTATOR ============ -->
-    <div class="category-body" id="body-spectator">
-      <div class="info-box">
-        <h3>Spectator — Important Information</h3>
-        <div class="row"><b>Entry Fee:</b>&nbsp;100 PKR for both days</div>
-        <p>Your ticket gives you access to both days of the Grand Slam. You may also purchase from the refreshment / hydration stalls and the coffee vendor on-site.</p>
-      </div>
-
-      <div id="spectator-player"></div>
-
-      <div class="section-card">
-        <div class="consent-box">
-          <label>
-            <input type="checkbox" id="spectator-consent" data-req>
-            <span>I'd like to attend the Studera Grand Slam as a spectator. I understand Studera reserves the right to manage entry at its discretion, and my details will be used solely to coordinate my attendance and stay in touch about the event.</span>
-          </label>
-          <div class="field-error" style="margin-left:28px;">Please accept to continue.</div>
-        </div>
-      </div>
-    </div>
-
-    <button type="submit" class="submit-btn" id="submitBtn" style="display:none;">Submit Registration →</button>
-    <div id="error-msg">Something went wrong while submitting. Please check your connection and try again.</div>
-  </form>
-
-  <div id="success-msg">
-    <h2>Thank you for registering! 🎉</h2>
-    <p>Studera's team will contact you soon. Please look out for an email from <span class="mail">studera.global@gmail.com</span> and keep an eye on your WhatsApp regularly as well.</p>
+  <!-- OPEN STATE (auto-shows once the timer hits zero) -->
+  <div id="open-state" class="open-state">
+    <h1>Registrations are <span class="slam">open!</span></h1>
+    <p class="lede">Teams, athletes and volunteers — your spot is waiting. Let's play.</p>
+    <a class="cta" href="index.html">Register now →</a>
+    <p class="footer-note">
+      Prize Pool <span class="live">110,000 PKR</span> · 25–26 July · The International School, DHA Phase 2
+    </p>
   </div>
 </div>
-
-<footer>Studera Grand Slam · 25–26 July 2025 · The International School, DHA Phase 2</footer>
 
 <script>
 // ============================================================
-// CONFIG — paste your deployed Google Apps Script URL here
+//  SET THE REGISTRATION OPEN DATE HERE
+//  Format: Year, Month (0 = Jan, so June = 5), Day, Hour, Min
+//  Example below = 10 July 2026, 00:00 (local time)
 // ============================================================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7IIpP7736vsQ3il4lAJJiwq7yO-yZP-CyseSesCrJdgOncnj38A4tRsi06_SsCaTP/exec';
+var OPEN_DATE = new Date(2026, 6, 10, 0, 0, 0);
 
-let currentCat = null;
+// Label shown in the sentence (kept human-friendly & separate so you
+// can word it however you like without touching the date math above).
+document.getElementById('open-date-label').textContent = 'the 10th of July';
 
-// ---------- Player block template ----------
-// opts: {prefix, index, label, badge, showPaddle, showCategory, categoryValue, lockCategory, captainEmail}
-function playerBlock(o){
-  const p = o.prefix;
-  const idBase = p + '-p' + o.index;
-  let badge = '';
-  if(o.badge === 'captain') badge = '<span class="captain-badge">Team Captain</span>';
-  else if(o.badge === 'sub') badge = '<span class="sub-badge">Substitute</span>';
-  else if(o.badge === 'lineup') badge = '<span class="lineup-badge">Lineup</span>';
+var d = document.getElementById('d'),
+    h = document.getElementById('h'),
+    m = document.getElementById('m'),
+    s = document.getElementById('s');
 
-  const captainEmail = o.captainEmail ? `
-    <div class="form-group">
-      <label class="field-label" for="${idBase}-email">Email Address <span class="hint">(we'll use this for payment &amp; updates)</span> <span class="req">*</span></label>
-      <input type="email" id="${idBase}-email" data-req placeholder="captain@example.com">
-      <div class="field-error">Please enter a valid email address.</div>
-    </div>` : '';
+function pad(n){ return (n < 10 ? '0' : '') + n; }
 
-  const paddle = o.showPaddle ? `
-    <div class="form-group">
-      <label class="field-label">Will you be using your own paddle equipment? <span class="req">*</span></label>
-      <div class="radio-group radio-row" data-radio="${idBase}-paddle">
-        <label class="radio-option"><input type="radio" name="${idBase}-paddle" value="Yes"><span>Yes</span></label>
-        <label class="radio-option"><input type="radio" name="${idBase}-paddle" value="No"><span>No</span></label>
-      </div>
-      <div class="field-error">Please choose one.</div>
-    </div>` : '';
+function tick(){
+  var now = new Date().getTime();
+  var diff = OPEN_DATE.getTime() - now;
 
-  const category = o.showCategory ? `
-    <div class="form-group">
-      <label class="field-label">Player Category</label>
-      <input type="text" id="${idBase}-catfield" class="locked" value="${o.categoryValue}" readonly>
-    </div>` : '';
-
-  return `
-  <div class="section-card" data-player="${idBase}">
-    <div class="section-title">Player ${o.index} ${badge}</div>
-    <div class="form-group">
-      <label class="field-label" for="${idBase}-name">Name <span class="req">*</span></label>
-      <input type="text" id="${idBase}-name" data-req placeholder="Full name">
-      <div class="field-error">Please enter a name.</div>
-    </div>
-    ${captainEmail}
-    <div class="form-group">
-      <label class="field-label" for="${idBase}-age">Age <span class="req">*</span></label>
-      <input type="number" id="${idBase}-age" data-req min="1" max="100" placeholder="e.g. 19">
-      <div class="field-error">Please enter a valid age.</div>
-    </div>
-    <div class="form-group">
-      <label class="field-label">Gender <span class="req">*</span></label>
-      <div class="radio-group radio-row" data-radio="${idBase}-gender">
-        <label class="radio-option"><input type="radio" name="${idBase}-gender" value="Male"><span>Male</span></label>
-        <label class="radio-option"><input type="radio" name="${idBase}-gender" value="Female"><span>Female</span></label>
-        <label class="radio-option"><input type="radio" name="${idBase}-gender" value="Other"><span>Other</span></label>
-      </div>
-      <div class="field-error">Please select a gender.</div>
-    </div>
-    <div class="form-group">
-      <label class="field-label" for="${idBase}-phone">Phone Number <span class="hint">(11 digits, e.g. 03001234567)</span> <span class="req">*</span></label>
-      <input type="tel" id="${idBase}-phone" data-req inputmode="numeric" maxlength="11" placeholder="03001234567">
-      <div class="field-error">Enter exactly 11 digits — no spaces, no country code.</div>
-    </div>
-    <div class="form-group">
-      <label class="field-label" for="${idBase}-nic">National Identity Card (NIC) Number <span class="req">*</span></label>
-      <input type="text" id="${idBase}-nic" data-req inputmode="numeric" maxlength="15" placeholder="e.g. 42101-1234567-1">
-      <div class="field-error">Enter a valid 13-digit CNIC number.</div>
-    </div>
-    ${category}
-    <div class="form-group">
-      <label class="field-label">Profession <span class="req">*</span></label>
-      <div class="radio-group radio-row" data-radio="${idBase}-prof">
-        <label class="radio-option"><input type="radio" name="${idBase}-prof" value="Work"><span>Work</span></label>
-        <label class="radio-option"><input type="radio" name="${idBase}-prof" value="Student"><span>Student</span></label>
-        <label class="radio-option"><input type="radio" name="${idBase}-prof" value="Other"><span>Other</span></label>
-      </div>
-      <div class="field-error">Please choose one.</div>
-      <input type="text" class="other-input" id="${idBase}-prof-other" placeholder="Please specify your profession">
-      <div class="conditional-block" id="${idBase}-student-block" style="margin-top:10px;">
-        <label class="field-label" for="${idBase}-uni">Name of University / High School <span class="req">*</span></label>
-        <input type="text" id="${idBase}-uni" placeholder="Institution name">
-        <div class="field-error">Please specify your institution.</div>
-      </div>
-    </div>
-    ${paddle}
-  </div>`;
-}
-
-// ---------- Render players for each category ----------
-function renderPadel(){
-  const host = document.getElementById('padel-players');
-  host.innerHTML =
-    playerBlock({prefix:'padel',index:1,badge:'captain',showPaddle:true,captainEmail:true}) +
-    playerBlock({prefix:'padel',index:2,showPaddle:true});
-  wireBlocks(host);
-}
-
-function renderFutsal(size){
-  const host = document.getElementById('futsal-players');
-  host.innerHTML = '';
-  if(!size){ document.getElementById('futsal-consent-card').style.display='none'; return; }
-  let html = '';
-  for(let i=1;i<=size;i++){
-    const isSub = i>5;
-    html += playerBlock({
-      prefix:'futsal', index:i,
-      badge: i===1 ? 'captain' : (isSub ? 'sub' : 'lineup'),
-      showCategory:true,
-      categoryValue: isSub ? 'Substitute' : 'Lineup',
-      captainEmail: i===1
-    });
-  }
-  host.innerHTML = html;
-  document.getElementById('futsal-consent-card').style.display='block';
-  wireBlocks(host);
-}
-
-function renderSingle(hostId, prefix){
-  const host = document.getElementById(hostId);
-  const includeNic = prefix !== 'volunteer' ? true : true; // both collect NIC per spec
-  host.innerHTML = playerBlock({prefix:prefix,index:1,label:'Your details'});
-  // relabel the card title for single-person categories
-  host.querySelector('.section-title').firstChild.textContent = 'Your Details ';
-  wireBlocks(host);
-}
-
-// ---------- Wire per-block interactions ----------
-function wireBlocks(scope){
-  // radio/checkbox selected highlight + progress
-  scope.querySelectorAll('.radio-option input, .checkbox-option input').forEach(input=>{
-    input.addEventListener('change', function(){
-      if(this.type==='radio'){
-        const g=this.closest('.radio-group');
-        if(g) g.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected'));
-      }
-      const parent=this.closest('.radio-option,.checkbox-option');
-      if(parent){
-        if(this.type==='checkbox') parent.classList.toggle('selected',this.checked);
-        else parent.classList.add('selected');
-      }
-      updateProgress();
-    });
-  });
-  // profession branching
-  scope.querySelectorAll('[data-radio$="-prof"]').forEach(group=>{
-    const name = group.getAttribute('data-radio');
-    group.querySelectorAll('input').forEach(r=>{
-      r.addEventListener('change', function(){
-        const base = name.replace('-prof','');
-        const otherEl = document.getElementById(base+'-prof-other');
-        const studentBlock = document.getElementById(base+'-student-block');
-        otherEl.classList.toggle('show', this.value==='Other');
-        if(this.value!=='Other') otherEl.value='';
-        studentBlock.classList.toggle('visible', this.value==='Student');
-        if(this.value!=='Student') document.getElementById(base+'-uni').value='';
-        updateProgress();
-      });
-    });
-  });
-  // phone: digits only
-  scope.querySelectorAll('input[type="tel"]').forEach(inp=>{
-    inp.addEventListener('input',function(){ this.value=this.value.replace(/\D/g,'').slice(0,11); updateProgress(); });
-  });
-  // nic: digits + dashes only
-  scope.querySelectorAll('input[id$="-nic"]').forEach(inp=>{
-    inp.addEventListener('input',function(){ this.value=this.value.replace(/[^\d-]/g,''); updateProgress(); });
-  });
-  scope.querySelectorAll('input[type="text"],input[type="number"],input[type="email"]').forEach(inp=>{
-    inp.addEventListener('input',updateProgress);
-  });
-}
-
-// ---------- Category chooser ----------
-document.querySelectorAll('.cat-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    const cat = card.getAttribute('data-cat');
-    document.querySelectorAll('.cat-card').forEach(c=>c.classList.remove('active'));
-    card.classList.add('active');
-    document.querySelectorAll('.category-body').forEach(b=>b.classList.remove('active'));
-    document.getElementById('body-'+cat).classList.add('active');
-    document.getElementById('category').value = cat.charAt(0).toUpperCase()+cat.slice(1);
-    document.getElementById('submitBtn').style.display='block';
-    currentCat = cat;
-
-    if(cat==='padel' && !document.getElementById('padel-players').innerHTML) renderPadel();
-    if(cat==='volunteer' && !document.getElementById('volunteer-player').innerHTML) renderSingle('volunteer-player','volunteer');
-    if(cat==='spectator' && !document.getElementById('spectator-player').innerHTML) renderSingle('spectator-player','spectator');
-
-    // spectator has no profession per spec -> strip those groups
-    if(cat==='spectator'){ stripSpectatorExtras(); }
-
-    document.getElementById('success-msg').style.display='none';
-    updateProgress();
-    document.querySelector('.chooser-title').scrollIntoView({behavior:'smooth',block:'start'});
-  });
-});
-
-// Spectator only needs: Name, Age, Gender, Phone, NIC (no profession/student)
-function stripSpectatorExtras(){
-  const host = document.getElementById('spectator-player');
-  const profGroup = host.querySelector('[data-radio$="-prof"]');
-  if(profGroup){ profGroup.closest('.form-group').remove(); }
-}
-
-// Futsal size change
-document.getElementById('futsal-size').addEventListener('change',function(){
-  renderFutsal(parseInt(this.value)||0);
-  updateProgress();
-});
-
-// Kit radio highlight (outside player blocks)
-document.querySelectorAll('[data-radio="futsal-kit"] input, [data-radio="vol-sport"] input, #vol-roles input').forEach(input=>{
-  input.addEventListener('change',function(){
-    if(this.type==='radio'){
-      const g=this.closest('.radio-group');
-      if(g) g.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected'));
-    }
-    const parent=this.closest('.radio-option,.checkbox-option');
-    if(parent){
-      if(this.type==='checkbox') parent.classList.toggle('selected',this.checked);
-      else parent.classList.add('selected');
-    }
-    enforceVolLimit();
-    updateProgress();
-  });
-});
-
-// Volunteer: limit to exactly 2 roles
-function enforceVolLimit(){
-  const boxes = document.querySelectorAll('#vol-roles input[type="checkbox"]');
-  const checked = [...boxes].filter(b=>b.checked);
-  boxes.forEach(b=>{
-    const dis = (checked.length>=2 && !b.checked);
-    b.disabled = dis;
-    b.closest('.checkbox-option').classList.toggle('disabled',dis);
-  });
-}
-
-document.querySelectorAll('#reg-form input[type="text"],#reg-form input[type="number"]').forEach(i=>i.addEventListener('input',updateProgress));
-
-// ============================================================
-// VALIDATION HELPERS
-// ============================================================
-function showErr(el, show){
-  const grp = el.closest('.form-group') || el.closest('.consent-box') || el.parentElement;
-  const err = grp ? grp.querySelector('.field-error') : null;
-  if(err) err.classList.toggle('show', show);
-  return !show;
-}
-function reqText(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, el.value.trim()===''); }
-function reqEmail(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, !/\S+@\S+\.\S+/.test(el.value.trim())); }
-function reqAge(id){ const el=document.getElementById(id); if(!el) return true; const v=parseInt(el.value); return showErr(el, !(v>=1&&v<=100)); }
-function reqPhone(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, !/^\d{11}$/.test(el.value)); }
-function reqNic(id){ const el=document.getElementById(id); if(!el) return true; const digits=el.value.replace(/\D/g,''); return showErr(el, digits.length!==13); }
-function reqRadio(name){
-  const any=document.querySelector(`input[name="${name}"]`);
-  if(!any) return true;
-  const checked=document.querySelector(`input[name="${name}"]:checked`);
-  const grp=any.closest('.form-group')||any.closest('[data-radio]').parentElement;
-  const err=grp.querySelector('.field-error');
-  if(err) err.classList.toggle('show', !checked);
-  return !!checked;
-}
-function reqCheck(id){ const el=document.getElementById(id); if(!el) return true; return showErr(el, !el.checked); }
-
-function validatePlayer(idBase, opts){
-  let ok = true;
-  ok &= reqText(idBase+'-name');
-  if(opts.captainEmail) ok &= reqEmail(idBase+'-email');
-  ok &= reqAge(idBase+'-age');
-  ok &= reqRadio(idBase+'-gender');
-  ok &= reqPhone(idBase+'-phone');
-  ok &= reqNic(idBase+'-nic');
-  if(opts.profession!==false){
-    ok &= reqRadio(idBase+'-prof');
-    const prof=document.querySelector(`input[name="${idBase}-prof"]:checked`);
-    if(prof && prof.value==='Other') ok &= reqText(idBase+'-prof-other');
-    if(prof && prof.value==='Student') ok &= reqText(idBase+'-uni');
-  }
-  if(opts.showPaddle) ok &= reqRadio(idBase+'-paddle');
-  return !!ok;
-}
-
-function validateForm(){
-  let ok = true;
-  if(currentCat==='padel'){
-    ok &= reqText('padel-team');
-    ok &= validatePlayer('padel-p1',{captainEmail:true,showPaddle:true});
-    ok &= validatePlayer('padel-p2',{showPaddle:true});
-    ok &= reqCheck('padel-consent');
-  } else if(currentCat==='futsal'){
-    ok &= reqText('futsal-team');
-    ok &= reqRadio('futsal-kit');
-    ok &= reqText('futsal-size');
-    const size=parseInt(document.getElementById('futsal-size').value)||0;
-    for(let i=1;i<=size;i++) ok &= validatePlayer('futsal-p'+i,{captainEmail:i===1});
-    if(size) ok &= reqCheck('futsal-consent');
-  } else if(currentCat==='volunteer'){
-    ok &= validatePlayer('volunteer-p1',{});
-    ok &= reqRadio('vol-sport');
-    const roles=document.querySelectorAll('#vol-roles input:checked').length;
-    const rerr=document.querySelector('#vol-roles').closest('.form-group').querySelector('.field-error');
-    if(roles!==2){ rerr.classList.add('show'); ok=false; } else rerr.classList.remove('show');
-    ok &= reqCheck('volunteer-consent');
-  } else if(currentCat==='spectator'){
-    ok &= validatePlayer('spectator-p1',{profession:false});
-    ok &= reqCheck('spectator-consent');
-  }
-  if(!ok){
-    const firstErr=document.querySelector('.field-error.show');
-    if(firstErr) firstErr.scrollIntoView({behavior:'smooth',block:'center'});
-  }
-  return !!ok;
-}
-
-// ============================================================
-// PROGRESS
-// ============================================================
-function fieldFilled(el){
-  if(!el) return false;
-  if(el.type==='checkbox') return el.checked;
-  return el.value.trim()!=='';
-}
-function radioFilled(name){ return !!document.querySelector(`input[name="${name}"]:checked`); }
-
-function collectRequiredIds(){
-  // returns array of {kind, ref} for currentCat
-  const list=[];
-  const addPlayer=(base,opts)=>{
-    list.push(['text',base+'-name']);
-    if(opts.captainEmail) list.push(['text',base+'-email']);
-    list.push(['text',base+'-age']);
-    list.push(['radio',base+'-gender']);
-    list.push(['text',base+'-phone']);
-    list.push(['text',base+'-nic']);
-    if(opts.profession!==false){
-      list.push(['radio',base+'-prof']);
-      const prof=document.querySelector(`input[name="${base}-prof"]:checked`);
-      if(prof&&prof.value==='Other') list.push(['text',base+'-prof-other']);
-      if(prof&&prof.value==='Student') list.push(['text',base+'-uni']);
-    }
-    if(opts.showPaddle) list.push(['radio',base+'-paddle']);
-  };
-  if(currentCat==='padel'){
-    list.push(['text','padel-team']);
-    addPlayer('padel-p1',{captainEmail:true,showPaddle:true});
-    addPlayer('padel-p2',{showPaddle:true});
-    list.push(['check','padel-consent']);
-  } else if(currentCat==='futsal'){
-    list.push(['text','futsal-team']); list.push(['radio','futsal-kit']); list.push(['text','futsal-size']);
-    const size=parseInt(document.getElementById('futsal-size').value)||0;
-    for(let i=1;i<=size;i++) addPlayer('futsal-p'+i,{captainEmail:i===1});
-    if(size) list.push(['check','futsal-consent']);
-  } else if(currentCat==='volunteer'){
-    addPlayer('volunteer-p1',{});
-    list.push(['radio','vol-sport']); list.push(['volroles','vol-roles']); list.push(['check','volunteer-consent']);
-  } else if(currentCat==='spectator'){
-    addPlayer('spectator-p1',{profession:false});
-    list.push(['check','spectator-consent']);
-  }
-  return list;
-}
-
-function updateProgress(){
-  if(!currentCat){ setBar(0); return; }
-  const list=collectRequiredIds();
-  if(!list.length){ setBar(0); return; }
-  let done=0;
-  list.forEach(([kind,ref])=>{
-    if(kind==='radio'){ if(radioFilled(ref)) done++; }
-    else if(kind==='volroles'){ if(document.querySelectorAll('#vol-roles input:checked').length===2) done++; }
-    else { if(fieldFilled(document.getElementById(ref))) done++; }
-  });
-  setBar(Math.round(done/list.length*100));
-}
-function setBar(p){
-  document.getElementById('progress-fill').style.width=p+'%';
-  document.getElementById('progress-label').textContent=p+'%';
-}
-
-// ============================================================
-// SUBMIT
-// ============================================================
-function playerData(base,opts){
-  const d={
-    name:val(base+'-name'), age:val(base+'-age'),
-    gender:radioVal(base+'-gender'), phone:val(base+'-phone'),
-    nic:val(base+'-nic').replace(/\D/g,'')
-  };
-  if(opts.captainEmail) d.email=val(base+'-email');
-  if(opts.categoryValue) d.playerCategory=val(base+'-catfield')||opts.categoryValue;
-  if(opts.profession!==false){
-    d.profession=radioVal(base+'-prof');
-    if(d.profession==='Other') d.professionOther=val(base+'-prof-other');
-    if(d.profession==='Student') d.institution=val(base+'-uni');
-  }
-  if(opts.showPaddle) d.ownPaddle=radioVal(base+'-paddle');
-  return d;
-}
-
-document.getElementById('reg-form').addEventListener('submit', async function(e){
-  e.preventDefault();
-  if(!currentCat){ return; }
-  if(!validateForm()) return;
-
-  const data = { category: document.getElementById('category').value, submittedAt:new Date().toISOString() };
-
-  if(currentCat==='padel'){
-    data.teamName=val('padel-team');
-    data.players=[
-      playerData('padel-p1',{captainEmail:true,showPaddle:true,role:'Team Captain'}),
-      playerData('padel-p2',{showPaddle:true})
-    ];
-    data.players[0].role='Team Captain';
-  } else if(currentCat==='futsal'){
-    data.teamName=val('futsal-team');
-    data.hasKit=radioVal('futsal-kit');
-    const size=parseInt(document.getElementById('futsal-size').value)||0;
-    data.teamSize=size;
-    data.players=[];
-    for(let i=1;i<=size;i++){
-      const pd=playerData('futsal-p'+i,{captainEmail:i===1, categoryValue:i>5?'Substitute':'Lineup'});
-      if(i===1) pd.role='Team Captain';
-      data.players.push(pd);
-    }
-  } else if(currentCat==='volunteer'){
-    data.volunteer=playerData('volunteer-p1',{});
-    data.sportPreference=radioVal('vol-sport');
-    data.rolePreferences=[...document.querySelectorAll('#vol-roles input:checked')].map(c=>c.value);
-  } else if(currentCat==='spectator'){
-    data.spectator=playerData('spectator-p1',{profession:false});
+  if (diff <= 0){
+    // Timer finished — flip to the "open" state.
+    document.getElementById('countdown-state').style.display = 'none';
+    document.getElementById('open-state').style.display = 'block';
+    clearInterval(timer);
+    return;
   }
 
-  const btn=document.getElementById('submitBtn');
-  btn.disabled=true; btn.textContent='Submitting…';
-  document.getElementById('error-msg').style.display='none';
+  var days = Math.floor(diff / 86400000);
+  var hrs  = Math.floor((diff % 86400000) / 3600000);
+  var mins = Math.floor((diff % 3600000) / 60000);
+  var secs = Math.floor((diff % 60000) / 1000);
 
-  if(GOOGLE_SCRIPT_URL==='PASTE_YOUR_URL_HERE'){
-    console.log('Registration (add Apps Script URL to send):', data);
-    return showSuccess();
-  }
-  try{
-    await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    showSuccess();
-  }catch(err){
-    document.getElementById('error-msg').style.display='block';
-    btn.disabled=false; btn.textContent='Submit Registration →';
-  }
-});
-
-function val(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
-function radioVal(name){ const r=document.querySelector(`input[name="${name}"]:checked`); return r?r.value:''; }
-
-function showSuccess(){
-  document.getElementById('reg-form').style.display='none';
-  document.getElementById('success-msg').style.display='block';
-  setBar(100);
-  window.scrollTo({top:0,behavior:'smooth'});
+  d.textContent = days;
+  h.textContent = pad(hrs);
+  m.textContent = pad(mins);
+  s.textContent = pad(secs);
 }
 
-setBar(0);
+tick();
+var timer = setInterval(tick, 1000);
 </script>
 </body>
 </html>
